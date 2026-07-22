@@ -13,6 +13,12 @@ EACO — Earth's Best AI + RWA + Web3 Coin
 
 Total Supply: 1.35 billion EACO.
 
+eaco for earth people, 
+
+eaco, Global netizens' own MEMEcoin, 
+
+Calculate labor value and quantify Earth's resources. 
+
 Definition of EACO (Recommended Version, Jun 2026)
 
 The core connotation of EACO is derived from four keywords:
