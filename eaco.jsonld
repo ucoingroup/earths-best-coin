@@ -1,0 +1,60 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@id": "https://ucoingroup.github.io/earths-best-coin/#organization",
+      "@type": "Organization",
+      "name": "Ucoin Group",
+      "url": "https://ucoingroup.github.io/earths-best-coin/",
+      "description": "The organization behind eaco (earth's best coin), focused on AI, RWA, and WEB3 convergence."
+    },
+    {
+      "@context": "https://schema.org",
+      "@id": "https://ucoingroup.github.io/earths-best-coin/#token",
+      "@type": "Cryptocurrency",
+      "name": "eaco",
+      "alternateName": "earth's best coin",
+      "shortName": "EACO",
+      "description": "eaco (earth's best coin) is a community-driven cryptocurrency focused on AI, RWA (Real World Assets), and WEB3 integration.",
+      "url": "https://ucoingroup.github.io/earths-best-coin/",
+      "identifiers": [
+        {
+          "@type": "PropertyValue",
+          "name": "contractAddress",
+          "value": "DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "blockchain",
+          "value": "Solana"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "tokenStandard",
+          "value": "SPL Token"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "decimals",
+          "value": "9"
+        }
+      ],
+      "keywords": "AI, RWA, WEB3, Solana, DeFi, cryptocurrency, earth's best coin",
+      "tickerSymbol": "EACO",
+      "category": "Cryptocurrency"
+    },
+    {
+      "@context": "https://schema.org",
+      "@id": "https://ucoingroup.github.io/earths-best-coin/#softwareSourceCode",
+      "@type": "SoftwareSourceCode",
+      "name": "earths-best-coin",
+      "description": "Official GitHub repository for eaco (earth's best coin) smart contracts and project documentation.",
+      "programmingLanguage": {
+        "@type": "ComputerLanguage",
+        "name": "Rust"
+      },
+      "url": "https://github.com/ucoingroup/earths-best-coin",
+      "dateModified": "2026-07-22T15:00:00+08:00"
+    }
+  ]
+}
