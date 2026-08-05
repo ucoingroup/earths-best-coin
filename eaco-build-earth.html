@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EACO Build Earth — 从零精通编程 | Master Programming from Scratch</title>
+<meta name="description" content="EACO Build Earth 支持联合国六种官方语言：中文、English、Français、Español、Русский、العربية。结合费曼学习法与 build-your-own-x，从零复刻技术，精通编程。">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#00ff88">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EACO Build Earth">
+<style>
+  :root {
+    --bg-primary: #030712;
+    --bg-secondary: #0a0f1e;
+    --bg-card: #0d1321;
+    --bg-card-hover: #111827;
+    --border: #1e293b;
+    --accent-green: #00ff88;
+    --accent-green-dim: #00cc6a;
+    --accent-blue: #38bdf8;
+    --accent-purple: #a78bfa;
+    --accent-orange: #fb923c;
+    --accent-pink: #f472b6;
+    --accent-yellow: #fbbf24;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --glow-green: 0 0 30px rgba(0,255,136,0.3);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Inter', 'Noto Sans SC', 'Noto Sans', -apple-system, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.65;
+  }
+  html[lang="ar"] body {
+    font-family: 'Noto Sans Arabic', 'Inter', 'Noto Sans', sans-serif;
+  }
+
+  /* ─── Navigation ─── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:1000;
+    background: rgba(3,7,18,0.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+  }
+  .nav-inner {
+    max-width:1400px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    height:62px; gap:12px;
+  }
+  .nav-logo {
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none; color:var(--text-primary);
+    flex-shrink:0;
+  }
+  .nav-logo-icon {
+    width:34px; height:34px;
+    background: linear-gradient(135deg, #00ff88, #38bdf8);
+    border-radius:10px; display:flex; align-items:center; justify-content:center;
+    font-weight:900; font-size:17px; color:#030712;
+  }
+  .nav-logo-text { font-weight:700; font-size:16px; letter-spacing:-0.3px; white-space:nowrap; }
+  .nav-logo-text span { color: var(--accent-green); }
+
+  .nav-links { display:flex; gap:4px; align-items:center; flex-shrink:0; }
+  .nav-links a {
+    color: var(--text-secondary); text-decoration:none;
+    padding:6px 12px; border-radius:8px;
+    font-size:13.5px; font-weight:500; transition:all 0.2s;
+    white-space:nowrap;
+  }
+  .nav-links a:hover { color:var(--text-primary); background:rgba(255,255,255,0.05); }
+
+  .lang-switch {
+    display:flex; align-items:center; gap:2px;
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius:10px; padding:3px;
+    direction:ltr; flex-shrink:0;
+    max-width:100%; overflow-x:auto;
+  }
+  .lang-btn {
+    background:none; border:none; cursor:pointer;
+    padding:5px 9px; border-radius:7px;
+    color:var(--text-secondary); font-size:12.5px; font-weight:600;
+    transition:all 0.2s; white-space:nowrap;
+    font-family:inherit;
+  }
+  .lang-btn.active { background: var(--accent-green); color:#030712; }
+  .lang-btn:hover:not(.active) { color:var(--text-primary); background:rgba(255,255,255,0.06); }
+
+  /* ─── Hero ─── */
+  .hero {
+    min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align:center; padding:130px 1.5rem 80px;
+    position:relative;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,255,136,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(56,189,248,0.06) 0%, transparent 50%);
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+    background-size:60px 60px;
+    pointer-events:none;
+  }
+
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background: rgba(0,255,136,0.1); border:1px solid rgba(0,255,136,0.3);
+    border-radius:100px; padding:7px 18px;
+    font-size:13px; color:var(--accent-green); font-weight:600;
+    margin-bottom:28px;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%,100% { box-shadow: 0 0 10px rgba(0,255,136,0.2); }
+    50% { box-shadow: 0 0 25px rgba(0,255,136,0.4); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 6.5vw, 5.2rem);
+    font-weight:900; line-height:1.12;
+    letter-spacing:-2px; margin-bottom:22px;
+    max-width:980px;
+  }
+  html[lang="ar"] .hero h1 { letter-spacing:0; line-height:1.35; }
+  .hero h1 .line1 { display:block; color:var(--text-primary); }
+  .hero h1 .line2 {
+    display:block;
+    background: linear-gradient(135deg, #00ff88, #38bdf8, #a78bfa);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .hero h1 .line3 {
+    display:block; color:var(--accent-green);
+    text-shadow: 0 0 40px rgba(0,255,136,0.5);
+  }
+
+  .hero-sub {
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    color:var(--text-secondary); max-width:700px;
+    margin-bottom:14px; line-height:1.8;
+  }
+  .hero-quote {
+    font-family:'JetBrains Mono','Noto Sans Arabic', monospace;
+    color:var(--accent-green); font-size:14px;
+    margin-bottom:40px; opacity:0.9;
+    padding:10px 24px; background:rgba(0,255,136,0.05);
+    border:1px solid rgba(0,255,136,0.15); border-radius:8px;
+    display:inline-block; max-width:90%;
+  }
+
+  .hero-actions { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .btn-primary {
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--accent-green); color:#030712;
+    font-weight:700; font-size:15px; padding:14px 30px;
+    border-radius:12px; text-decoration:none;
+    transition:all 0.25s; border:none; cursor:pointer;
+    box-shadow: var(--glow-green);
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 0 50px rgba(0,255,136,0.5); }
+  .btn-secondary {
+    display:inline-flex; align-items:center; gap:8px;
+    background: transparent; color:var(--text-primary);
+    font-weight:600; font-size:15px; padding:14px 26px;
+    border-radius:12px; text-decoration:none;
+    border:1px solid var(--border); cursor:pointer;
+    transition:all 0.25s;
+  }
+  .btn-secondary:hover { border-color:var(--accent-green); color:var(--accent-green); }
+
+  .hero-stats {
+    display:flex; gap:44px; margin-top:60px; flex-wrap:wrap; justify-content:center;
+  }
+  .stat { text-align:center; }
+  .stat-num {
+    font-size:2.1rem; font-weight:800; color:var(--accent-green);
+    font-family:'JetBrains Mono', monospace;
+  }
+  .stat-label { font-size:12.5px; color:var(--text-muted); margin-top:4px; }
+
+  /* ─── Sections ─── */
+  .section-eaco, .section-byx, .section-roadmap, .section-lang { padding:90px 1.5rem; }
+  .section-eaco { background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
+  .section-byx { background: var(--bg-secondary); }
+  .section-roadmap { background: var(--bg-primary); }
+  .section-lang { background: var(--bg-secondary); }
+  .container { max-width:1200px; margin:0 auto; }
+
+  .section-label {
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:700; text-transform:uppercase;
+    letter-spacing:2px; color:var(--accent-green);
+    margin-bottom:16px;
+  }
+  .section-label::before {
+    content:''; width:24px; height:2px;
+    background:var(--accent-green); border-radius:2px;
+    flex-shrink:0;
+  }
+
+  .section-title {
+    font-size:clamp(1.8rem, 3.6vw, 2.7rem);
+    font-weight:800; letter-spacing:-1px; line-height:1.25;
+    margin-bottom:16px;
+  }
+  html[lang="ar"] .section-title { letter-spacing:0; }
+  .section-desc { color:var(--text-secondary); font-size:1.02rem; max-width:680px; line-height:1.8; }
+
+  /* EACO grid */
+  .eaco-grid {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:20px; margin-top:44px;
+  }
+  .eaco-card {
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius:16px; padding:26px;
+    transition:all 0.3s; position:relative; overflow:hidden;
+  }
+  .eaco-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+    opacity:0; transition:opacity 0.3s;
+  }
+  .eaco-card:hover { border-color:rgba(0,255,136,0.3); transform:translateY(-4px); }
+  .eaco-card:hover::before { opacity:1; }
+  .eaco-card-icon {
+    width:46px; height:46px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:21px; margin-bottom:14px;
+  }
+  .eaco-card h3 { font-size:1.05rem; font-weight:700; margin-bottom:8px; }
+  .eaco-card p { font-size:13.5px; color:var(--text-secondary); line-height:1.7; }
+  .card-tag {
+    display:inline-block; font-size:10.5px; font-weight:700;
+    padding:3px 10px; border-radius:100px; margin-top:12px;
+    text-transform:uppercase; letter-spacing:1px;
+  }
+  .tag-energy { background:rgba(251,191,36,0.15); color:#fbbf24; }
+  .tag-attitude { background:rgba(0,255,136,0.15); color:#00ff88; }
+  .tag-coop { background:rgba(56,189,248,0.15); color:#38bdf8; }
+  .tag-optim { background:rgba(167,139,250,0.15); color:#a78bfa; }
+
+  /* CA Banner */
+  .ca-banner {
+    background: linear-gradient(135deg, #0d1321, #111827);
+    border:1px solid rgba(0,255,136,0.2); border-radius:16px;
+    padding:22px 28px; margin-top:32px;
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:16px;
+  }
+  .ca-banner-text { font-size:12.5px; color:var(--text-muted); margin-bottom:5px; }
+  .ca-banner addr {
+    font-family:'JetBrains Mono', monospace; font-size:13.5px;
+    color:var(--accent-green); font-style:normal;
+    background:rgba(0,255,136,0.08); padding:6px 14px;
+    border-radius:8px; border:1px solid rgba(0,255,136,0.2);
+    word-break:break-all; direction:ltr; display:inline-block;
+  }
+  .ca-banner-links { display:flex; gap:10px; flex-wrap:wrap; }
+  .ca-link {
+    font-size:13px; font-weight:600; padding:8px 16px;
+    border-radius:8px; text-decoration:none;
+    transition:all 0.2s; white-space:nowrap;
+  }
+  .ca-link-trade { background:var(--accent-green); color:#030712; }
+  .ca-link-trade:hover { box-shadow:var(--glow-green); }
+  .ca-link-info { border:1px solid var(--border); color:var(--text-secondary); }
+  .ca-link-info:hover { border-color:var(--accent-blue); color:var(--accent-blue); }
+
+  /* BYX */
+  .byx-header { text-align:center; margin-bottom:48px; }
+  .byx-header .section-label { justify-content:center; }
+  .byx-header .section-label::before { display:none; }
+  .byx-header .section-desc { margin:0 auto; }
+
+  .category-tabs {
+    display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
+    margin-bottom:38px;
+  }
+  .tab-btn {
+    background:none; border:1px solid var(--border);
+    color:var(--text-secondary); padding:8px 18px;
+    border-radius:100px; cursor:pointer; font-size:13.5px;
+    font-weight:500; transition:all 0.2s;
+    font-family:inherit;
+  }
+  .tab-btn:hover { border-color:var(--accent-green); color:var(--accent-green); }
+  .tab-btn.active {
+    background: var(--accent-green); color:#030712;
+    border-color:var(--accent-green); font-weight:700;
+  }
+
+  .byx-grid {
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+    gap:18px;
+  }
+  .byx-card {
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius:16px; padding:22px;
+    transition:all 0.3s; text-decoration:none; color:inherit;
+    display:block;
+  }
+  .byx-card:hover {
+    border-color:rgba(0,255,136,0.3); transform:translateY(-3px);
+    box-shadow:0 8px 40px rgba(0,0,0,0.3);
+  }
+  .byx-card-header {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:12px;
+  }
+  .byx-card-icon {
+    width:38px; height:38px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:17px;
+  }
+  .byx-difficulty { display:flex; gap:3px; }
+  .diff-star { width:10px; height:10px; border-radius:50%; }
+  .diff-easy { background:#00ff88; }
+  .diff-med { background:#fbbf24; }
+  .diff-hard { background:#f472b6; }
+  .byx-card h3 { font-size:0.98rem; font-weight:700; margin-bottom:6px; line-height:1.4; }
+  .byx-card p { font-size:12.5px; color:var(--text-secondary); line-height:1.65; }
+  .byx-lang { display:flex; gap:6px; flex-wrap:wrap; margin-top:12px; }
+  .lang-tag {
+    font-size:10.5px; font-weight:600; padding:3px 8px;
+    border-radius:6px; background:rgba(255,255,255,0.05);
+    color:var(--text-muted); border:1px solid var(--border);
+  }
+
+  /* Roadmap */
+  .roadmap-grid {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:18px; margin-top:44px;
+  }
+  .roadmap-card {
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius:16px; padding:26px;
+    position:relative; overflow:hidden;
+  }
+  .roadmap-card::before {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+  }
+  .roadmap-card.green::before { background:var(--accent-green); }
+  .roadmap-card.blue::before { background:var(--accent-blue); }
+  .roadmap-card.purple::before { background:var(--accent-purple); }
+  .roadmap-card.orange::before { background:var(--accent-orange); }
+  .roadmap-card.pink::before { background:var(--accent-pink); }
+  .roadmap-card.yellow::before { background:var(--accent-yellow); }
+
+  .roadmap-step {
+    font-family:'JetBrains Mono','Noto Sans Arabic', monospace;
+    font-size:10.5px; color:var(--text-muted); text-transform:uppercase;
+    letter-spacing:1.5px; margin-bottom:10px;
+  }
+  .roadmap-card h3 { font-size:1.05rem; font-weight:700; margin-bottom:10px; }
+  .roadmap-card p { font-size:12.5px; color:var(--text-secondary); line-height:1.65; }
+  .roadmap-list { list-style:none; margin-top:14px; }
+  .roadmap-list li {
+    font-size:12.5px; color:var(--text-secondary); padding:4px 0;
+    display:flex; align-items:flex-start; gap:8px;
+  }
+  .roadmap-list li::before {
+    content:'→'; color:var(--accent-green); font-weight:700;
+    flex-shrink:0; margin-top:1px;
+  }
+  html[dir="rtl"] .roadmap-list li::before { content:'←'; }
+
+  /* Community */
+  .lang-grid {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:14px; margin-top:40px;
+  }
+  .lang-card {
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius:14px; padding:22px 16px;
+    text-align:center; text-decoration:none; color:inherit;
+    transition:all 0.3s;
+  }
+  .lang-card:hover { border-color:var(--accent-blue); transform:translateY(-3px); }
+  .lang-flag { font-size:2.4rem; margin-bottom:10px; display:block; }
+  .lang-name { font-weight:700; font-size:14.5px; margin-bottom:4px; line-height:1.4; }
+  .lang-sub { font-size:12px; color:var(--text-muted); }
+
+  /* ─── Footer ─── */
+  footer {
+    background: var(--bg-secondary);
+    border-top:1px solid var(--border);
+    padding:56px 1.5rem 28px;
+  }
+  .footer-inner { max-width:1200px; margin:0 auto; }
+  .footer-top {
+    display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:36px; margin-bottom:36px;
+  }
+  @media(max-width:820px) { .footer-top { grid-template-columns:1fr 1fr; } }
+  @media(max-width:480px) { .footer-top { grid-template-columns:1fr; } }
+  .footer-brand h3 {
+    font-size:19px; font-weight:800; margin-bottom:8px;
+    background: linear-gradient(135deg, #00ff88, #38bdf8);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .footer-brand p { font-size:12.5px; color:var(--text-muted); line-height:1.75; }
+  .footer-col h4 { font-size:11.5px; text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); margin-bottom:13px; }
+  .footer-col a {
+    display:block; font-size:12.5px; color:var(--text-secondary);
+    text-decoration:none; padding:4px 0; transition:color 0.2s;
+  }
+  .footer-col a:hover { color:var(--accent-green); }
+
+  .footer-links-section { margin-bottom:36px; }
+  .footer-links-title {
+    font-size:11.5px; text-transform:uppercase; letter-spacing:2px;
+    color:var(--text-muted); margin-bottom:13px;
+  }
+  .footer-link-grid { display:flex; flex-wrap:wrap; gap:9px; }
+  .footer-ext-link {
+    font-size:11.5px; color:var(--text-secondary);
+    text-decoration:none; padding:6px 13px;
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius:8px; transition:all 0.2s;
+  }
+  .footer-ext-link:hover { border-color:var(--accent-green); color:var(--accent-green); }
+
+  .footer-bottom {
+    border-top:1px solid var(--border); padding-top:22px;
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:12px;
+  }
+  .footer-copy { font-size:12px; color:var(--text-muted); }
+  .footer-ca {
+    font-family:'JetBrains Mono', monospace; font-size:11.5px;
+    color:var(--text-muted); direction:ltr;
+  }
+
+  /* Animation */
+  .fade-in { opacity:0; transform:translateY(30px); transition:all 0.6s ease-out; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+
+  /* RTL tweaks */
+  html[dir="rtl"] .ca-banner addr, html[dir="rtl"] .footer-ca, html[dir="rtl"] .lang-switch, html[dir="rtl"] .stat-num { direction:ltr; }
+
+  @media(max-width:860px) {
+    .nav-links { display:none; }
+  }
+  @media(max-width:480px) {
+    .lang-btn { padding:4px 7px; font-size:11.5px; }
+    .hero { padding-top:110px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── Navigation ─── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">E</div>
+      <div class="nav-logo-text">EACO <span>Build Earth</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="#about" data-i18n="nav.about">关于</a>
+      <a href="#byx" data-i18n="nav.byx">从零造轮子</a>
+      <a href="#roadmap" data-i18n="nav.roadmap">学习路线</a>
+      <a href="#community" data-i18n="nav.community">社区</a>
+    </div>
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-btn active" data-lang="zh" title="中文">中文</button>
+      <button class="lang-btn" data-lang="en" title="English">EN</button>
+      <button class="lang-btn" data-lang="fr" title="Français">FR</button>
+      <button class="lang-btn" data-lang="es" title="Español">ES</button>
+      <button class="lang-btn" data-lang="ru" title="Русский">RU</button>
+      <button class="lang-btn" data-lang="ar" title="العربية">عربي</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div class="hero-badge">
+    🌍 <span data-i18n="hero.badge">地球第一MEME币 × 编程学习圣经 · 联合国六种官方语言</span>
+  </div>
+  <h1>
+    <span class="line1" data-i18n="hero.h1.1">通过从零复刻</span>
+    <span class="line2" data-i18n="hero.h1.2">你喜欢的技术</span>
+    <span class="line3" data-i18n="hero.h1.3">精通编程</span>
+  </h1>
+  <p class="hero-sub" data-i18n="hero.sub">EACO Build Earth — 学习编程的最佳方式，是从零复刻你喜欢的东西。结合费曼方法 + build-your-own-x 理念，让你真正理解每一行代码的价值。</p>
+  <div class="hero-quote" data-i18n="hero.quote">"我不能创造的东西，我就不理解。" — 理查德·费曼</div>
+  <div class="hero-actions">
+    <a href="#byx" class="btn-primary" data-i18n="hero.btn.start">🚀 开始学习</a>
+    <a href="#about" class="btn-secondary" data-i18n="hero.btn.about">了解更多</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">525K+</div>
+      <div class="stat-label" data-i18n="hero.stat.byx">build-your-own-x Stars</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">30+</div>
+      <div class="stat-label" data-i18n="hero.stat.tech">技术领域</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1.35B</div>
+      <div class="stat-label" data-i18n="hero.stat.eaco">EACO 总供应量</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label" data-i18n="hero.stat.lang">联合国官方语言</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EACO About ─── -->
+<section class="section-eaco" id="about">
+  <div class="container">
+    <div class="section-label" data-i18n="eaco.label">关于 EACO</div>
+    <h2 class="section-title" data-i18n="eaco.title">EACO = Earth's Best Coin</h2>
+    <p class="section-desc" data-i18n="eaco.desc">宇宙唯一的地球原生MEME币，立足Solana公链，以地球环保、可持续发展、全球村共识为核心，融合DeFi去中心化金融，打造属于全人类的原生地球代币。</p>
+
+    <div class="eaco-grid">
+      <div class="eaco-card fade-in">
+        <div class="eaco-card-icon" style="background:rgba(251,191,36,0.15)">⚡</div>
+        <h3 data-i18n="eaco.e.title">Energy · 能量</h3>
+        <p data-i18n="eaco.e.desc">正能量驱动，全球村民共同创造可持续价值网络，每一次链上交互都是能量流动。</p>
+        <span class="card-tag tag-energy">Positive Energy</span>
+      </div>
+      <div class="eaco-card fade-in">
+        <div class="eaco-card-icon" style="background:rgba(0,255,136,0.15)">💡</div>
+        <h3 data-i18n="eaco.a.title">Attitude · 态度</h3>
+        <p data-i18n="eaco.a.desc">积极态度塑造文明，我们相信代码即财富，学习即创造，每个人的贡献都值得被量化。</p>
+        <span class="card-tag tag-attitude">Positive Mindset</span>
+      </div>
+      <div class="eaco-card fade-in">
+        <div class="eaco-card-icon" style="background:rgba(56,189,248,0.15)">🤝</div>
+        <h3 data-i18n="eaco.c.title">Cooperation · 协作</h3>
+        <p data-i18n="eaco.c.desc">全球协作是EACO的灵魂，7大语种社区、全球村民共建地球第一MEME币生态。</p>
+        <span class="card-tag tag-coop">Global Collaboration</span>
+      </div>
+      <div class="eaco-card fade-in">
+        <div class="eaco-card-icon" style="background:rgba(167,139,250,0.15)">⚙️</div>
+        <h3 data-i18n="eaco.o.title">Optimization · 优化</h3>
+        <p data-i18n="eaco.o.desc">持续优化是发展的动力，智能合约自动执行、社区DAO治理、代码即规则、规则即财富。</p>
+        <span class="card-tag tag-optim">Continuous Optimization</span>
+      </div>
+    </div>
+
+    <div class="ca-banner fade-in">
+      <div>
+        <div class="ca-banner-text" data-i18n="ca.label">合约地址 (Solana)</div>
+        <address>DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH</address>
+      </div>
+      <div class="ca-banner-links">
+        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" class="ca-link ca-link-trade" target="_blank" rel="noopener">Swap on Raydium</a>
+        <a href="https://app.meteora.ag/dlmm/6ZfCi3qzhgDN1ygHVYXvfsfrwz8ZhQ7hD5mJtjeuUDyE" class="ca-link ca-link-info" target="_blank" rel="noopener">Meteora DLMM</a>
+        <a href="https://www.oklink.com/zh-hans/solana/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" class="ca-link ca-link-info" target="_blank" rel="noopener">OKLink</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Build Your Own X ─── -->
+<section class="section-byx" id="byx">
+  <div class="container">
+    <div class="byx-header">
+      <div class="section-label" data-i18n="byx.label">Build Your Own X</div>
+      <h2 class="section-title" data-i18n="byx.title">精选从零造轮子教程</h2>
+      <p class="section-desc" data-i18n="byx.desc">从上千个教程中精选最有价值的实战方向，每个都满足三个条件：完整可运行的代码、逐步详细的讲解、多种编程语言可选。造轮子不是目的，理解轮子才是目的。</p>
+    </div>
+
+    <div class="category-tabs">
+      <button class="tab-btn active" data-cat="all" data-i18n="byx.tab.all">全部 All</button>
+      <button class="tab-btn" data-cat="beginner" data-i18n="byx.tab.beginner">🌱 新手友好</button>
+      <button class="tab-btn" data-cat="intermediate" data-i18n="byx.tab.intermediate">🎯 有基础</button>
+      <button class="tab-btn" data-cat="advanced" data-i18n="byx.tab.advanced">🔥 高手挑战</button>
+      <button class="tab-btn" data-cat="web3" data-i18n="byx.tab.web3">🔗 Web3</button>
+    </div>
+
+    <div class="byx-grid" id="byxGrid"></div>
+  </div>
+</section>
+
+<!-- ─── Roadmap ─── -->
+<section class="section-roadmap" id="roadmap">
+  <div class="container">
+    <div class="section-label" data-i18n="road.label">学习路线</div>
+    <h2 class="section-title" data-i18n="road.title">按职业目标选择学习路线</h2>
+    <p class="section-desc" data-i18n="road.desc">想学新语言？边造轮子边学，效率比看语法书高10倍。每个方向都精选最适合入门的项目，从零开始建立直觉。</p>
+    <div class="roadmap-grid" id="roadmapGrid"></div>
+  </div>
+</section>
+
+<!-- ─── Community ─── -->
+<section class="section-lang" id="community">
+  <div class="container">
+    <div class="section-label" data-i18n="comm.label">全球社区</div>
+    <h2 class="section-title" data-i18n="comm.title">多语种全球社区</h2>
+    <p class="section-desc" data-i18n="comm.desc">加入全球村民大家庭，用你的母语参与EACO生态建设。无论你在世界的哪个角落，都能找到属于你的社区。</p>
+    <div class="lang-grid" id="communityGrid"></div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>EACO Build Earth</h3>
+        <p data-i18n="footer.brand">EACO Build Earth 结合费曼学习法与 build-your-own-x 理念，让每个人通过从零复刻技术来真正理解编程，同时参与全球最独特的MEME币生态建设。</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.resources">学习资源</h4>
+        <a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank" rel="noopener">Build Your Own X</a>
+        <a href="https://codecrafters.io" target="_blank" rel="noopener">Codecrafters</a>
+        <a href="https://github.com/eacocc/EACO_Exchange_DApp" target="_blank" rel="noopener">EACO Exchange DApp</a>
+        <a href="https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Solscan</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.swap">Swap & Trade</h4>
+        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Raydium E-SOL</a>
+        <a href="https://app.meteora.ag/dlmm/6ZfCi3qzhgDN1ygHVYXvfsfrwz8ZhQ7hD5mJtjeuUDyE" target="_blank" rel="noopener">Meteora E-USDT</a>
+        <a href="https://www.orca.so/pools?tokens=DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">Orca Pools</a>
+        <a href="https://www.oklink.com/zh-hans/solana/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH" target="_blank" rel="noopener">OKLink</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.official">官方渠道</h4>
+        <a href="https://x.com/eacocc" target="_blank" rel="noopener">X (Twitter)</a>
+        <a href="https://linktr.ee/eacocc" target="_blank" rel="noopener">Linktree</a>
+        <a href="https://linktr.ee/web3eaco" target="_blank" rel="noopener">Web3 EACO</a>
+        <a href="https://eaco-build-world.base44.app/" target="_blank" rel="noopener">EACO Build Earth</a>
+      </div>
+    </div>
+
+    <div class="footer-links-section">
+      <div class="footer-links-title" data-i18n="footer.ext.title">🔗 EACO 生态链接</div>
+      <div class="footer-link-grid">
+        <a href="https://ucoingroup.github.io/earths-best-coin/" class="footer-ext-link" target="_blank" rel="noopener">🌍 Earths Best Coin</a>
+        <a href="https://ucoingroup.github.io/eaco50rate/" class="footer-ext-link" target="_blank" rel="noopener">📊 EACO 50 Rate</a>
+        <a href="https://ucoingroup.github.io/100WaysToWealth/" class="footer-ext-link" target="_blank" rel="noopener">💰 100 Ways To Wealth</a>
+        <a href="https://ucoingroup.github.io/earth-100-friends/" class="footer-ext-link" target="_blank" rel="noopener">🤝 Earth 100 Friends</a>
+        <a href="https://ucoingroup.github.io/eacoSWAP/" class="footer-ext-link" target="_blank" rel="noopener">⚡ EACO SWAP</a>
+        <a href="https://ucoingroup.github.io/good-books/" class="footer-ext-link" target="_blank" rel="noopener">📚 Good Books</a>
+        <a href="https://ucoingroup.github.io/eur-eaco/" class="footer-ext-link" target="_blank" rel="noopener">🏆 EUR EACO</a>
+        <a href="https://ucoingroup.github.io/au-trade/" class="footer-ext-link" target="_blank" rel="noopener">💹 AU Trade</a>
+        <a href="https://ucoingroup.github.io/Mohist-Tech/" class="footer-ext-link" target="_blank" rel="noopener">⚙️ Mohist Tech</a>
+        <a href="https://eaco-build-world.base44.app/" class="footer-ext-link" target="_blank" rel="noopener">🏗️ EACO Build Earth</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 EACO Build Earth · <span data-i18n="footer.tagline">构建你自己的未来</span></div>
+      <div class="footer-ca">CA: DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH · Solana</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  i18n — 联合国六种官方语言
+//  zh(中文) en(English) fr(Français) es(Español) ru(Русский) ar(العربية)
+// ═══════════════════════════════════════════════════════
+const i18n = {
+  zh: {
+    'nav.about':'关于','nav.byx':'从零造轮子','nav.roadmap':'学习路线','nav.community':'社区',
+    'hero.badge':'地球第一MEME币 × 编程学习圣经 · 联合国六种官方语言',
+    'hero.h1.1':'通过从零复刻','hero.h1.2':'你喜欢的技术','hero.h1.3':'精通编程',
+    'hero.sub':'EACO Build Earth — 学习编程的最佳方式，是从零复刻你喜欢的东西。结合费曼方法 + build-your-own-x 理念，让你真正理解每一行代码的价值。',
+    'hero.quote':'"我不能创造的东西，我就不理解。" — 理查德·费曼',
+    'hero.btn.start':'🚀 开始学习','hero.btn.about':'了解更多',
+    'hero.stat.byx':'build-your-own-x Stars','hero.stat.tech':'技术领域','hero.stat.eaco':'EACO 总供应量','hero.stat.lang':'联合国官方语言',
+    'eaco.label':'关于 EACO','eaco.title':'EACO = Earth\'s Best Coin',
+    'eaco.desc':'宇宙唯一的地球原生MEME币，立足Solana公链，以地球环保、可持续发展、全球村共识为核心，融合DeFi去中心化金融，打造属于全人类的原生地球代币。',
+    'eaco.e.title':'Energy · 能量','eaco.e.desc':'正能量驱动，全球村民共同创造可持续价值网络，每一次链上交互都是能量流动。',
+    'eaco.a.title':'Attitude · 态度','eaco.a.desc':'积极态度塑造文明，我们相信代码即财富，学习即创造，每个人的贡献都值得被量化。',
+    'eaco.c.title':'Cooperation · 协作','eaco.c.desc':'全球协作是EACO的灵魂，7大语种社区、全球村民共建地球第一MEME币生态。',
+    'eaco.o.title':'Optimization · 优化','eaco.o.desc':'持续优化是发展的动力，智能合约自动执行、社区DAO治理、代码即规则、规则即财富。',
+    'ca.label':'合约地址 (Solana)',
+    'byx.label':'Build Your Own X','byx.title':'精选从零造轮子教程',
+    'byx.desc':'从上千个教程中精选最有价值的实战方向，每个都满足三个条件：完整可运行的代码、逐步详细的讲解、多种编程语言可选。造轮子不是目的，理解轮子才是目的。',
+    'byx.tab.all':'全部 All','byx.tab.beginner':'🌱 新手友好','byx.tab.intermediate':'🎯 有基础','byx.tab.advanced':'🔥 高手挑战','byx.tab.web3':'🔗 Web3',
+    'road.label':'学习路线','road.title':'按职业目标选择学习路线',
+    'road.desc':'想学新语言？边造轮子边学，效率比看语法书高10倍。每个方向都精选最适合入门的项目，从零开始建立直觉。',
+    'comm.label':'全球社区','comm.title':'多语种全球社区',
+    'comm.desc':'加入全球村民大家庭，用你的母语参与EACO生态建设。无论你在世界的哪个角落，都能找到属于你的社区。',
+    'footer.brand':'EACO Build Earth 结合费曼学习法与 build-your-own-x 理念，让每个人通过从零复刻技术来真正理解编程，同时参与全球最独特的MEME币生态建设。',
+    'footer.resources':'学习资源','footer.swap':'Swap & Trade','footer.official':'官方渠道',
+    'footer.ext.title':'🔗 EACO 生态链接','footer.tagline':'构建你自己的未来',
+    roadmap: [
+      {c:'green',step:'后端工程师',title:'后端工程师路线',p:'理解服务器端核心：从Shell到Docker，构建完整后端直觉。',list:['Shell → 命令行与进程管理','Database → 数据存储原理','Redis → 内存数据库核心','Web Server → 网络编程实战','Docker → 容器化部署']},
+      {c:'blue',step:'AI工程师',title:'AI工程师路线',p:'理解AI核心：从神经网络到LLM，掌握机器学习本质。',list:['Neural Network → 反向传播直觉','AI Model (LLM) → Transformer架构','Search Engine → 向量检索原理','Build LLM from Scratch → 完整复现GPT']},
+      {c:'purple',step:'前端工程师',title:'前端工程师路线',p:'理解浏览器核心：从DOM到框架，掌握前端工程化本质。',list:['React → Virtual DOM原理','Text Editor → 文本编辑器核心','Web Browser → 渲染引擎原理','Markdown Parser → AST解析']},
+      {c:'orange',step:'系统工程师',title:'系统工程师路线',p:'理解底层核心：从内存到内核，深度掌握计算机本质。',list:['OS → 内核与内存管理','Shell → 命令行工具链','Network Stack → TCP/IP协议栈','Memory Allocator → 内存分配器']},
+      {c:'pink',step:'DevOps工程师',title:'DevOps工程师路线',p:'理解部署核心：从容器到CI/CD，掌握现代交付体系。',list:['Docker → Linux容器原理','Git → 版本控制核心','Shell → 自动化脚本','Web Server → 反向代理与负载均衡']},
+      {c:'yellow',step:'全栈工程师',title:'全栈工程师路线',p:'理解全链路：从数据库到前端，建立完整工程视角。',list:['Git → 版本控制与协作','Database → SQL与存储引擎','React → 前端框架核心','Web Server → API设计','Docker → 容器化部署']}
+    ],
+    community: [
+      {flag:'🇨🇳',name:'中文社区',sub:'华语 · Chinese',url:'https://t.me/aieaco'},
+      {flag:'🌍',name:'English Group',sub:'Global · English',url:'https://t.me/e_eacocc'},
+      {flag:'🇪🇸',name:'Spanish Group',sub:'Español · 西班牙语',url:'https://t.me/eacoespanish'},
+      {flag:'🇫🇷',name:'French Group',sub:'Français · 法语',url:'https://t.me/efrencheaco'},
+      {flag:'🇷🇺',name:'Russian Group',sub:'Русский · 俄语',url:'https://t.me/erussianeaco'},
+      {flag:'🇸🇦',name:'Arabic Group',sub:'العربية · 阿拉伯语',url:'https://t.me/earhcoingroup'},
+      {flag:'🌏',name:'JP·KR·SEA Group',sub:'日·韩·东南亚',url:'https://t.me/ejapaneaco'}
+    ]
+  },
+  en: {
+    'nav.about':'About','nav.byx':'Build Your Own X','nav.roadmap':'Roadmap','nav.community':'Community',
+    'hero.badge':'The World\'s First Earth Meme Coin × Programming Bible · 6 UN Languages',
+    'hero.h1.1':'Master programming by','hero.h1.2':'recreating your favorite','hero.h1.3':'technologies from scratch',
+    'hero.sub':'EACO Build Earth — The best way to learn programming is to recreate what you love. Combining Feynman\'s method + the build-your-own-x philosophy, so you truly understand the value of every line of code.',
+    'hero.quote':'"What I cannot create, I do not understand." — Richard Feynman',
+    'hero.btn.start':'🚀 Start Learning','hero.btn.about':'Learn More',
+    'hero.stat.byx':'build-your-own-x Stars','hero.stat.tech':'Tech Domains','hero.stat.eaco':'EACO Total Supply','hero.stat.lang':'UN Official Languages',
+    'eaco.label':'About EACO','eaco.title':'EACO = Earth\'s Best Coin',
+    'eaco.desc':'The only Earth-native MEME coin in the universe, built on Solana, with Earth protection, sustainable development, and global village consensus at its core. EACO integrates DeFi to create a universal native Earth token for all humanity.',
+    'eaco.e.title':'Energy','eaco.e.desc':'Positive energy drives a sustainable value network. Every on-chain interaction is energy in motion.',
+    'eaco.a.title':'Attitude','eaco.a.desc':'Positive mindset shapes civilization. Code is wealth, learning is creation, and every contribution deserves to be quantified.',
+    'eaco.c.title':'Cooperation','eaco.c.desc':'Global collaboration is the soul of EACO. 7-language communities and villagers worldwide build the world\'s greatest Earth MEME coin ecosystem together.',
+    'eaco.o.title':'Optimization','eaco.o.desc':'Continuous optimization drives development. Smart contracts run automatically, community DAO governance — code is the rule.',
+    'ca.label':'Contract Address (Solana)',
+    'byx.label':'Build Your Own X','byx.title':'Curated Build-from-Scratch Tutorials',
+    'byx.desc':'Selected from thousands of tutorials, each meeting three conditions: complete runnable code, step-by-step explanations, and multiple language options. The goal is not to reinvent the wheel — it\'s to understand it.',
+    'byx.tab.all':'All','byx.tab.beginner':'🌱 Beginner','byx.tab.intermediate':'🎯 Intermediate','byx.tab.advanced':'🔥 Advanced','byx.tab.web3':'🔗 Web3',
+    'road.label':'Learning Roadmap','road.title':'Choose Your Path by Career Goal',
+    'road.desc':'Want to learn a new language? Learn by building — 10× more efficient than reading syntax books. Each path is curated with the best beginner projects.',
+    'comm.label':'Global Community','comm.title':'Multilingual Global Communities',
+    'comm.desc':'Join the global village family and participate in the EACO ecosystem in your native language. Wherever you are, there\'s a community for you.',
+    'footer.brand':'EACO Build Earth combines Feynman\'s learning method with the build-your-own-x philosophy, letting everyone truly understand programming by rebuilding technology from scratch, while participating in the world\'s most unique MEME coin ecosystem.',
+    'footer.resources':'Resources','footer.swap':'Swap & Trade','footer.official':'Official',
+    'footer.ext.title':'🔗 EACO Ecosystem Links','footer.tagline':'Build Your Own Future',
+    roadmap: [
+      {c:'green',step:'Backend Engineer',title:'Backend Engineer Path',p:'Understand server-side core: from Shell to Docker, build complete backend intuition.',list:['Shell → CLI & process management','Database → storage fundamentals','Redis → in-memory DB core','Web Server → network programming','Docker → containerization']},
+      {c:'blue',step:'AI Engineer',title:'AI Engineer Path',p:'Understand AI core: from neural networks to LLMs, master the essence of ML.',list:['Neural Network → backprop intuition','AI Model (LLM) → Transformer architecture','Search Engine → vector retrieval','Build LLM from Scratch → replicate GPT']},
+      {c:'purple',step:'Frontend Engineer',title:'Frontend Engineer Path',p:'Understand browser core: from DOM to frameworks, master front-end engineering.',list:['React → Virtual DOM principles','Text Editor → core mechanics','Web Browser → rendering engine','Markdown Parser → AST parsing']},
+      {c:'orange',step:'System Engineer',title:'System Engineer Path',p:'Understand low-level core: from memory to kernel, master computer fundamentals.',list:['OS → kernel & memory management','Shell → command-line toolkit','Network Stack → TCP/IP stack','Memory Allocator → allocation']},
+      {c:'pink',step:'DevOps Engineer',title:'DevOps Engineer Path',p:'Understand deployment core: from containers to CI/CD, master modern delivery.',list:['Docker → Linux container internals','Git → version control core','Shell → automation scripts','Web Server → reverse proxy & LB']},
+      {c:'yellow',step:'Full Stack Engineer',title:'Full Stack Engineer Path',p:'Understand the full chain: from database to frontend, build a complete engineering perspective.',list:['Git → version control & collaboration','Database → SQL & storage engines','React → front-end framework core','Web Server → API design','Docker → containerization']}
+    ],
+    community: [
+      {flag:'🇨🇳',name:'Chinese Community',sub:'Chinese · 华语',url:'https://t.me/aieaco'},
+      {flag:'🌍',name:'English Group',sub:'Global · English',url:'https://t.me/e_eacocc'},
+      {flag:'🇪🇸',name:'Spanish Group',sub:'Español · Spanish',url:'https://t.me/eacoespanish'},
+      {flag:'🇫🇷',name:'French Group',sub:'Français · French',url:'https://t.me/efrencheaco'},
+      {flag:'🇷🇺',name:'Russian Group',sub:'Русский · Russian',url:'https://t.me/erussianeaco'},
+      {flag:'🇸🇦',name:'Arabic Group',sub:'العربية · Arabic',url:'https://t.me/earhcoingroup'},
+      {flag:'🌏',name:'JP·KR·SEA Group',sub:'Japanese · Korean · SEA',url:'https://t.me/ejapaneaco'}
+    ]
+  },
+  fr: {
+    'nav.about':'À propos','nav.byx':'Créez votre propre X','nav.roadmap':'Parcours','nav.community':'Communauté',
+    'hero.badge':'La première Meme Coin de la Terre × La Bible de la programmation · 6 langues ONU',
+    'hero.h1.1':'Maîtrisez la programmation','hero.h1.2':'en recréant vos technologies','hero.h1.3':'préférées de zéro',
+    'hero.sub':'EACO Build Earth — La meilleure façon d\'apprendre à coder est de recréer ce que vous aimez. Méthode Feynman + philosophie build-your-own-x : comprenez vraiment la valeur de chaque ligne de code.',
+    'hero.quote':'"Ce que je ne peux pas créer, je ne le comprends pas." — Richard Feynman',
+    'hero.btn.start':'🚀 Commencer','hero.btn.about':'En savoir plus',
+    'hero.stat.byx':'Étoiles build-your-own-x','hero.stat.tech':'Domaines tech','hero.stat.eaco':'Offre totale EACO','hero.stat.lang':'Langues officielles ONU',
+    'eaco.label':'À propos d\'EACO','eaco.title':'EACO = La meilleure pièce de la Terre',
+    'eaco.desc':'La seule Meme Coin native de la Terre dans l\'univers, construite sur Solana, centrée sur la protection de l\'environnement, le développement durable et le consensus du village global.',
+    'eaco.e.title':'Énergie','eaco.e.desc':'L\'énergie positive crée un réseau de valeur durable. Chaque interaction on-chain est de l\'énergie en mouvement.',
+    'eaco.a.title':'Attitude','eaco.a.desc':'L\'attitude positive façonne la civilisation. Le code est richesse, apprendre c\'est créer, chaque contribution mérite d\'être mesurée.',
+    'eaco.c.title':'Coopération','eaco.c.desc':'La collaboration mondiale est l\'âme d\'EACO. Des communautés en 7 langues construisent ensemble l\'écosystème de la meilleure meme coin de la Terre.',
+    'eaco.o.title':'Optimisation','eaco.o.desc':'L\'optimisation continue propulse le développement. Contrats intelligents, gouvernance DAO : le code est la règle.',
+    'ca.label':'Adresse du contrat (Solana)',
+    'byx.label':'Créez votre propre X','byx.title':'Tutoriels sélectionnés — recréez de zéro',
+    'byx.desc':'Sélectionnés parmi des milliers de tutoriels : code complet exécutable, explications pas à pas et plusieurs langages. Le but n\'est pas de réinventer la roue, c\'est de la comprendre.',
+    'byx.tab.all':'Tous','byx.tab.beginner':'🌱 Débutant','byx.tab.intermediate':'🎯 Intermédiaire','byx.tab.advanced':'🔥 Avancé','byx.tab.web3':'🔗 Web3',
+    'road.label':'Feuille de route','road.title':'Choisissez votre parcours selon votre objectif',
+    'road.desc':'Vous voulez apprendre un nouveau langage ? Apprenez en construisant — 10× plus efficace que les livres de syntaxe.',
+    'comm.label':'Communauté mondiale','comm.title':'Communautés mondiales multilingues',
+    'comm.desc':'Rejoignez la famille du village global et participez à l\'écosystème EACO dans votre langue maternelle. Où que vous soyez, une communauté vous attend.',
+    'footer.brand':'EACO Build Earth allie la méthode Feynman à la philosophie build-your-own-x : chacun comprend vraiment la programmation en reconstruisant la technologie de zéro, tout en participant à l\'écosystème de la meme coin la plus unique au monde.',
+    'footer.resources':'Ressources','footer.swap':'Échanger','footer.official':'Officiel',
+    'footer.ext.title':'🔗 Liens de l\'écosystème EACO','footer.tagline':'Construis ton propre avenir',
+    roadmap: [
+      {c:'green',step:'Ingénieur Backend',title:'Parcours Backend',p:'Comprenez le cœur du serveur : de Shell à Docker, construisez une intuition backend complète.',list:['Shell → CLI et gestion des processus','Base de données → fondamentaux du stockage','Redis → cœur des bases en mémoire','Serveur Web → programmation réseau','Docker → conteneurisation']},
+      {c:'blue',step:'Ingénieur IA',title:'Parcours IA',p:'Comprenez le cœur de l\'IA : des réseaux de neurones aux LLM, maîtrisez l\'essence du ML.',list:['Réseau de neurones → rétropropagation','Modèle IA (LLM) → architecture Transformer','Moteur de recherche → recherche vectorielle','LLM de zéro → répliquez GPT']},
+      {c:'purple',step:'Ingénieur Frontend',title:'Parcours Frontend',p:'Comprenez le cœur du navigateur : du DOM aux frameworks.',list:['React → principes du Virtual DOM','Éditeur de texte → mécanismes de base','Navigateur Web → moteur de rendu','Analyseur Markdown → parsing AST']},
+      {c:'orange',step:'Ingénieur Système',title:'Parcours Système',p:'Comprenez le niveau bas : de la mémoire au noyau.',list:['OS → noyau et gestion mémoire','Shell → outils en ligne de commande','Pile réseau → stack TCP/IP','Allocateur mémoire → allocation']},
+      {c:'pink',step:'Ingénieur DevOps',title:'Parcours DevOps',p:'Comprenez le déploiement : des conteneurs au CI/CD.',list:['Docker → conteneurs Linux','Git → contrôle de version','Shell → scripts d\'automatisation','Serveur Web → proxy inverse & LB']},
+      {c:'yellow',step:'Ingénieur Full Stack',title:'Parcours Full Stack',p:'Comprenez toute la chaîne : de la base de données au frontend.',list:['Git → contrôle de version et collaboration','Base de données → SQL et moteurs','React → cœur des frameworks frontend','Serveur Web → conception d\'API','Docker → conteneurisation']}
+    ],
+    community: [
+      {flag:'🇨🇳',name:'Communauté chinoise',sub:'Chinois · 华语',url:'https://t.me/aieaco'},
+      {flag:'🌍',name:'English Group',sub:'Global · Anglais',url:'https://t.me/e_eacocc'},
+      {flag:'🇪🇸',name:'Communauté espagnole',sub:'Español · Espagnol',url:'https://t.me/eacoespanish'},
+      {flag:'🇫🇷',name:'Communauté française',sub:'Français · French',url:'https://t.me/efrencheaco'},
+      {flag:'🇷🇺',name:'Communauté russe',sub:'Русский · Russe',url:'https://t.me/erussianeaco'},
+      {flag:'🇸🇦',name:'Communauté arabe',sub:'العربية · Arabe',url:'https://t.me/earhcoingroup'},
+      {flag:'🌏',name:'Communauté JP·KR·SEA',sub:'Japonais · Coréen · Asie du Sud-Est',url:'https://t.me/ejapaneaco'}
+    ]
+  },
+  es: {
+    'nav.about':'Acerca de','nav.byx':'Construye tu propio X','nav.roadmap':'Ruta de aprendizaje','nav.community':'Comunidad',
+    'hero.badge':'La primera Meme Coin de la Tierra × La Biblia de la programación · 6 idiomas ONU',
+    'hero.h1.1':'Domina la programación','hero.h1.2':'recreando tus tecnologías','hero.h1.3':'favoritas desde cero',
+    'hero.sub':'EACO Build Earth — La mejor forma de aprender a programar es recrear lo que amas. Método Feynman + filosofía build-your-own-x: entiende de verdad el valor de cada línea de código.',
+    'hero.quote':'"Lo que no puedo crear, no lo entiendo." — Richard Feynman',
+    'hero.btn.start':'🚀 Empezar','hero.btn.about':'Saber más',
+    'hero.stat.byx':'Estrellas build-your-own-x','hero.stat.tech':'Dominios tech','hero.stat.eaco':'Suministro total EACO','hero.stat.lang':'Idiomas oficiales ONU',
+    'eaco.label':'Acerca de EACO','eaco.title':'EACO = La mejor moneda de la Tierra',
+    'eaco.desc':'La única Meme Coin nativa de la Tierra del universo, construida en Solana, centrada en la protección ambiental, el desarrollo sostenible y el consenso de la aldea global.',
+    'eaco.e.title':'Energía','eaco.e.desc':'La energía positiva crea una red de valor sostenible. Cada interacción on-chain es energía en movimiento.',
+    'eaco.a.title':'Actitud','eaco.a.desc':'La actitud positiva moldea la civilización. El código es riqueza, aprender es crear, cada contribución merece ser cuantificada.',
+    'eaco.c.title':'Cooperación','eaco.c.desc':'La colaboración global es el alma de EACO. Comunidades en 7 idiomas construyen juntas el mejor ecosistema de meme coin de la Tierra.',
+    'eaco.o.title':'Optimización','eaco.o.desc':'La optimización continua impulsa el desarrollo. Contratos inteligentes, gobernanza DAO: el código es la regla.',
+    'ca.label':'Dirección del contrato (Solana)',
+    'byx.label':'Construye tu propio X','byx.title':'Tutoriales seleccionados desde cero',
+    'byx.desc':'Seleccionados entre miles de tutoriales: código completo ejecutable, explicaciones paso a paso y múltiples lenguajes. El objetivo no es reinventar la rueda, sino entenderla.',
+    'byx.tab.all':'Todos','byx.tab.beginner':'🌱 Principiante','byx.tab.intermediate':'🎯 Intermedio','byx.tab.advanced':'🔥 Avanzado','byx.tab.web3':'🔗 Web3',
+    'road.label':'Ruta de aprendizaje','road.title':'Elige tu camino según tu meta',
+    'road.desc':'¿Quieres aprender un nuevo lenguaje? Aprende construyendo — 10× más eficiente que leer libros de sintaxis.',
+    'comm.label':'Comunidad global','comm.title':'Comunidades globales multilingües',
+    'comm.desc':'Únete a la familia de la aldea global y participa en el ecosistema EACO en tu idioma materno. Dondequiera que estés, hay una comunidad para ti.',
+    'footer.brand':'EACO Build Earth combina el método Feynman con la filosofía build-your-own-x: todos entienden realmente la programación reconstruyendo tecnología desde cero, participando en el ecosistema de meme coin más único del mundo.',
+    'footer.resources':'Recursos','footer.swap':'Intercambiar','footer.official':'Oficial',
+    'footer.ext.title':'🔗 Enlaces del ecosistema EACO','footer.tagline':'Construye tu propio futuro',
+    roadmap: [
+      {c:'green',step:'Ingeniero Backend',title:'Ruta Backend',p:'Entiende el núcleo del servidor: de Shell a Docker, construye intuición backend completa.',list:['Shell → CLI y gestión de procesos','Base de datos → fundamentos de almacenamiento','Redis → núcleo de BD en memoria','Servidor web → programación de redes','Docker → contenedores']},
+      {c:'blue',step:'Ingeniero de IA',title:'Ruta de IA',p:'Entiende el núcleo de la IA: de redes neuronales a LLM, domina la esencia del ML.',list:['Red neuronal → retropropagación','Modelo de IA (LLM) → arquitectura Transformer','Buscador → recuperación vectorial','LLM desde cero → replica GPT']},
+      {c:'purple',step:'Ingeniero Frontend',title:'Ruta Frontend',p:'Entiende el núcleo del navegador: del DOM a los frameworks.',list:['React → principios de Virtual DOM','Editor de texto → mecánica central','Navegador web → motor de renderizado','Parser de Markdown → análisis AST']},
+      {c:'orange',step:'Ingeniero de Sistemas',title:'Ruta de Sistemas',p:'Entiende el nivel bajo: de la memoria al kernel.',list:['SO → kernel y gestión de memoria','Shell → herramientas CLI','Pila de red → stack TCP/IP','Asignador de memoria → asignación']},
+      {c:'pink',step:'Ingeniero DevOps',title:'Ruta DevOps',p:'Entiende el despliegue: de contenedores a CI/CD.',list:['Docker → contenedores Linux','Git → control de versiones','Shell → scripts de automatización','Servidor web → proxy inverso y LB']},
+      {c:'yellow',step:'Ingeniero Full Stack',title:'Ruta Full Stack',p:'Entiende toda la cadena: de la base de datos al frontend.',list:['Git → control de versiones y colaboración','Base de datos → SQL y motores','React → núcleo de frameworks frontend','Servidor web → diseño de APIs','Docker → contenedores']}
+    ],
+    community: [
+      {flag:'🇨🇳',name:'Comunidad china',sub:'Chino · 华语',url:'https://t.me/aieaco'},
+      {flag:'🌍',name:'English Group',sub:'Global · Inglés',url:'https://t.me/e_eacocc'},
+      {flag:'🇪🇸',name:'Comunidad española',sub:'Español · Spanish',url:'https://t.me/eacoespanish'},
+      {flag:'🇫🇷',name:'Comunidad francesa',sub:'Français · Francés',url:'https://t.me/efrencheaco'},
+      {flag:'🇷🇺',name:'Comunidad rusa',sub:'Русский · Ruso',url:'https://t.me/erussianeaco'},
+      {flag:'🇸🇦',name:'Comunidad árabe',sub:'العربية · Árabe',url:'https://t.me/earhcoingroup'},
+      {flag:'🌏',name:'Comunidad JP·KR·SEA',sub:'Japonés · Coreano · Sudeste Asiático',url:'https://t.me/ejapaneaco'}
+    ]
+  },
+  ru: {
+    'nav.about':'О проекте','nav.byx':'Собери свой X','nav.roadmap':'Маршрут','nav.community':'Сообщество',
+    'hero.badge':'Первая мем-монета Земли × Библия программирования · 6 языков ООН',
+    'hero.h1.1':'Освой программирование,','hero.h1.2':'воссоздавая любимые','hero.h1.3':'технологии с нуля',
+    'hero.sub':'EACO Build Earth — лучший способ учиться программированию — воссоздавать то, что любишь. Метод Фейнмана + философия build-your-own-x: пойми ценность каждой строки кода.',
+    'hero.quote':'"Что я не могу создать, я не понимаю." — Ричард Фейнман',
+    'hero.btn.start':'🚀 Начать','hero.btn.about':'Узнать больше',
+    'hero.stat.byx':'Звёзды build-your-own-x','hero.stat.tech':'Тех-доменов','hero.stat.eaco':'Общий запас EACO','hero.stat.lang':'Официальные языки ООН',
+    'eaco.label':'Об EACO','eaco.title':'EACO = Лучшая монета Земли',
+    'eaco.desc':'Единственная нативная мем-монета Земли во Вселенной на блокчейне Solana: экология, устойчивое развитие и консенсус глобальной деревни.',
+    'eaco.e.title':'Энергия','eaco.e.desc':'Позитивная энергия создаёт устойчивую сеть ценностей. Каждая on-chain транзакция — поток энергии.',
+    'eaco.a.title':'Отношение','eaco.a.desc':'Позитивное отношение формирует цивилизацию. Код — богатство, обучение — творчество, каждый вклад заслуживает оценки.',
+    'eaco.c.title':'Сотрудничество','eaco.c.desc':'Глобальное сотрудничество — душа EACO. Сообщества на 7 языках строят лучшую экосистему мем-монеты Земли.',
+    'eaco.o.title':'Оптимизация','eaco.o.desc':'Постоянная оптимизация движет развитием. Смарт-контракты, DAO-управление: код — это правило.',
+    'ca.label':'Адрес контракта (Solana)',
+    'byx.label':'Собери свой X','byx.title':'Лучшие уроки «с нуля»',
+    'byx.desc':'Выбрано из тысяч уроков: полный рабочий код, пошаговые объяснения, несколько языков программирования. Цель — не изобрести велосипед, а понять его.',
+    'byx.tab.all':'Все','byx.tab.beginner':'🌱 Новичок','byx.tab.intermediate':'🎯 Средний','byx.tab.advanced':'🔥 Продвинутый','byx.tab.web3':'🔗 Web3',
+    'road.label':'Маршрут обучения','road.title':'Выбери путь по своей цели',
+    'road.desc':'Хочешь выучить новый язык? Учись через создание — в 10 раз эффективнее учебников.',
+    'comm.label':'Глобальное сообщество','comm.title':'Многоязычные сообщества',
+    'comm.desc':'Присоединяйся к глобальной деревне и участвуй в экосистеме EACO на родном языке. Где бы ты ни был, есть сообщество для тебя.',
+    'footer.brand':'EACO Build Earth соединяет метод Фейнмана с философией build-your-own-x: каждый по-настоящему поймёт программирование, воссоздавая технологии с нуля, участвуя в самой уникальной мем-экосистеме мира.',
+    'footer.resources':'Ресурсы','footer.swap':'Обмен','footer.official':'Официально',
+    'footer.ext.title':'🔗 Ссылки экосистемы EACO','footer.tagline':'Построй своё будущее',
+    roadmap: [
+      {c:'green',step:'Бэкенд-инженер',title:'Путь бэкендера',p:'Пойми ядро сервера: от Shell до Docker — построй полную бэкенд-интуицию.',list:['Shell → CLI и управление процессами','БД → основы хранения','Redis → ядро in-memory БД','Веб-сервер → сетевое программирование','Docker → контейнеризация']},
+      {c:'blue',step:'AI-инженер',title:'Путь AI-инженера',p:'Пойми ядро ИИ: от нейросетей до LLM — овладей сутью ML.',list:['Нейросеть → обратное распространение','Модель ИИ (LLM) → архитектура Transformer','Поисковик → векторный поиск','LLM с нуля → повтори GPT']},
+      {c:'purple',step:'Фронтенд-инженер',title:'Путь фронтендера',p:'Пойми ядро браузера: от DOM до фреймворков.',list:['React → принципы Virtual DOM','Текстовый редактор → ядро','Браузер → движок рендеринга','Парсер Markdown → разбор AST']},
+      {c:'orange',step:'Системный инженер',title:'Путь системщика',p:'Пойми низкоуровневую часть: от памяти до ядра.',list:['ОС → ядро и управление памятью','Shell → инструменты CLI','Сетевой стек → TCP/IP','Аллокатор памяти → распределение']},
+      {c:'pink',step:'DevOps-инженер',title:'Путь DevOps',p:'Пойми деплой: от контейнеров до CI/CD.',list:['Docker → контейнеры Linux','Git → контроль версий','Shell → автоматизация','Веб-сервер → reverse proxy и LB']},
+      {c:'yellow',step:'Full Stack инженер',title:'Путь Full Stack',p:'Пойми всю цепочку: от БД до фронтенда.',list:['Git → контроль версий и коллаборация','БД → SQL и движки хранения','React → ядро фронтенд-фреймворков','Веб-сервер → дизайн API','Docker → контейнеризация']}
+    ],
+    community: [
+      {flag:'🇨🇳',name:'Китайское сообщество',sub:'Китайский · 华语',url:'https://t.me/aieaco'},
+      {flag:'🌍',name:'English Group',sub:'Глобальный · Английский',url:'https://t.me/e_eacocc'},
+      {flag:'🇪🇸',name:'Испанское сообщество',sub:'Español · Испанский',url:'https://t.me/eacoespanish'},
+      {flag:'🇫🇷',name:'Французское сообщество',sub:'Français · Французский',url:'https://t.me/efrencheaco'},
+      {flag:'🇷🇺',name:'Русское сообщество',sub:'Русский · Russian',url:'https://t.me/erussianeaco'},
+      {flag:'🇸🇦',name:'Арабское сообщество',sub:'العربية · Арабский',url:'https://t.me/earhcoingroup'},
+      {flag:'🌏',name:'Сообщество JP·KR·SEA',sub:'Японский · Корейский · ЮВА',url:'https://t.me/ejapaneaco'}
+    ]
+  },
+  ar: {
+    'nav.about':'حول','nav.byx':'ابنِ بنفسك X','nav.roadmap':'خارطة الطريق','nav.community':'المجتمع',
+    'hero.badge':'أول عملة ميم للأرض × كتاب البرمجة المقدس · 6 لغات رسمية للأمم المتحدة',
+    'hero.h1.1':'أتقن البرمجة عبر','hero.h1.2':'إعادة بناء التقنيات','hero.h1.3':'التي تحبها من الصفر',
+    'hero.sub':'EACO Build Earth — أفضل طريقة لتعلم البرمجة هي إعادة بناء ما تحب من الصفر. منهج فينمان + فلسفة build-your-own-x لتدرك القيمة الحقيقية لكل سطر برمجي.',
+    'hero.quote':'"ما لا أستطيع أن أصنعه، لا أفهمه." — ريتشارد فينمان',
+    'hero.btn.start':'🚀 ابدأ التعلم','hero.btn.about':'اعرف المزيد',
+    'hero.stat.byx':'نجوم build-your-own-x','hero.stat.tech':'مجالات تقنية','hero.stat.eaco':'إجمالي عرض EACO','hero.stat.lang':'اللغات الرسمية للأمم المتحدة',
+    'eaco.label':'عن EACO','eaco.title':'EACO = أفضل عملة للأرض',
+    'eaco.desc':'عملة الميم الأرضية الأصلية الوحيدة في الكون، مبنية على سولانا، تركز على حماية البيئة والتنمية المستدامة وإجماع القرية العالمية، مع دمج التمويل اللامركزي DeFi.',
+    'eaco.e.title':'الطاقة','eaco.e.desc':'الطاقة الإيجابية تبني شبكة قيمة مستدامة، وكل تفاعل على السلسلة هو تدفق للطاقة.',
+    'eaco.a.title':'الموقف','eaco.a.desc':'الموقف الإيجابي يصنع الحضارة. الكود ثروة، والتعلم إبداع، وكل مساهمة تستحق التقدير.',
+    'eaco.c.title':'التعاون','eaco.c.desc':'التعاون العالمي هو روح EACO، مجتمعات بسبع لغات وقرويون حول العالم يبنون معاً أفضل منظومة لعملة الميم الأرضية.',
+    'eaco.o.title':'التحسين','eaco.o.desc':'التحسين المستمر يدفع التطور. عقود ذكية وحوكمة لامركزية DAO — الكود هو القاعدة.',
+    'ca.label':'عنوان العقد (سولانا)',
+    'byx.label':'ابنِ بنفسك X','byx.title':'دروس مختارة للبناء من الصفر',
+    'byx.desc':'مختارة من آلاف الدروس، كل منها يتضمن كوداً كاملاً قابلاً للتشغيل وشرحاً خطوة بخطوة ولغات برمجة متعددة. الهدف ليس إعادة اختراع العجلة بل فهمها.',
+    'byx.tab.all':'الكل','byx.tab.beginner':'🌱 مبتدئ','byx.tab.intermediate':'🎯 متوسط','byx.tab.advanced':'🔥 متقدم','byx.tab.web3':'🔗 ويب3',
+    'road.label':'خارطة الطريق','road.title':'اختر مسارك حسب هدفك المهني',
+    'road.desc':'تريد تعلم لغة جديدة؟ تعلّم بالبناء — كفاءة أعلى 10 مرات من قراءة كتب القواعد.',
+    'comm.label':'المجتمع العالمي','comm.title':'مجتمعات عالمية متعددة اللغات',
+    'comm.desc':'انضم إلى عائلة القرية العالمية وشارك في منظومة EACO بلغتك الأم. أينما كنت، هناك مجتمع ينتظرك.',
+    'footer.brand':'يجمع EACO Build Earth بين منهج فينمان وفلسفة build-your-own-x ليفهم الجميع البرمجة حقاً عبر إعادة بناء التقنيات من الصفر، والمشاركة في منظومة العملات الميم الأكثر تميزاً في العالم.',
+    'footer.resources':'الموارد','footer.swap':'التداول','footer.official':'الرسمي',
+    'footer.ext.title':'🔗 روابط منظومة EACO','footer.tagline':'ابنِ مستقبلك بنفسك',
+    roadmap: [
+      {c:'green',step:'مهندس خلفي',title:'مسار مهندس الخلفية',p:'افهم قلب الخادم: من Shell إلى Docker، وابنِ حدساً خلفياً كاملاً.',list:['شل ← أوامر وإدارة العمليات','قاعدة بيانات ← أساسيات التخزين','ريديس ← نواة القواعد الذاكراتية','خادم ويب ← برمجة الشبكات','دوكر ← الحاويات']},
+      {c:'blue',step:'مهندس ذكاء اصطناعي',title:'مسار مهندس الذكاء الاصطناعي',p:'افهم نواة الذكاء الاصطناعي: من الشبكات العصبية إلى النماذج اللغوية الكبيرة.',list:['شبكة عصبية ← الانتشار العكسي','نموذج LLM ← بنية المحولات','محرك بحث ← استرجاع المتجهات','ابنِ LLM من الصفر ← أعد بناء GPT']},
+      {c:'purple',step:'مهندس واجهات',title:'مسار مهندس الواجهات',p:'افهم نواة المتصفح: من DOM إلى الأطر البرمجية.',list:['رياكت ← مبادئ DOM الافتراضي','محرر نصوص ← الآليات الأساسية','متصفح ويب ← محرك العرض','محلل ماركداون ← تحليل AST']},
+      {c:'orange',step:'مهندس أنظمة',title:'مسار مهندس الأنظمة',p:'افهم المستوى المنخفض: من الذاكرة إلى النواة.',list:['نظام تشغيل ← النواة وإدارة الذاكرة','شل ← أدوات سطر الأوامر','حزمة شبكات ← مكدس TCP/IP','مخصص ذاكرة ← التوزيع']},
+      {c:'pink',step:'مهندس ديف أوبس',title:'مسار ديف أوبس',p:'افهم النشر: من الحاويات إلى CI/CD.',list:['دوكر ← داخل حاويات لينكس','جيت ← نواة التحكم بالإصدارات','شل ← الأتمتة','خادم ويب ← بروكسي عكسي وLB']},
+      {c:'yellow',step:'مهندس شامل',title:'مسار المهندس الشامل',p:'افهم السلسلة كاملة: من قاعدة البيانات إلى الواجهات.',list:['جيت ← التحكم بالإصدارات والتعاون','قاعدة بيانات ← SQL ومحركات التخزين','رياكت ← نواة أطر الواجهات','خادم ويب ← تصميم واجهات API','دوكر ← الحاويات']}
+    ],
+    community: [
+      {flag:'🇨🇳',name:'المجتمع الصيني',sub:'صيني · 华语',url:'https://t.me/aieaco'},
+      {flag:'🌍',name:'المجموعة الإنجليزية',sub:'عالمي · إنجليزي',url:'https://t.me/e_eacocc'},
+      {flag:'🇪🇸',name:'المجتمع الإسباني',sub:'Español · إسباني',url:'https://t.me/eacoespanish'},
+      {flag:'🇫🇷',name:'المجتمع الفرنسي',sub:'Français · فرنسي',url:'https://t.me/efrencheaco'},
+      {flag:'🇷🇺',name:'المجتمع الروسي',sub:'Русский · روسي',url:'https://t.me/erussianeaco'},
+      {flag:'🇸🇦',name:'المجتمع العربي',sub:'العربية · عربي',url:'https://t.me/earhcoingroup'},
+      {flag:'🌏',name:'مجتمع اليابان وكوريا وجنوب شرق آسيا',sub:'ياباني · كوري · جنوب شرق آسيا',url:'https://t.me/ejapaneaco'}
+    ]
+  }
+};
+
+// ═══════════════════════════════════════════════════════
+//  Build Your Own X 教程数据 — 6 语言
+// ═══════════════════════════════════════════════════════
+const byxData = [
+  {
+    cat:'beginner', icon:'🐚', iconBg:'rgba(0,255,136,0.15)', diff:2, langs:['Go','C','Rust','Python'],
+    url:'https://github.com/codecrafters-io/build-your-own-x#build-your-own-shell',
+    t:{zh:'写一个 Shell',en:'Build Your Own Shell',fr:'Créez votre propre Shell',es:'Crea tu propio Shell',ru:'Создай свой Shell',ar:'اصنع شلّتك الخاصة'},
+    d:{zh:'理解命令行、进程管理、管道。300行代码搞定。',en:'Understand CLI, process management, pipes. Done in 300 lines.',fr:'Comprenez le CLI, la gestion des processus et les pipes. 300 lignes suffisent.',es:'Entiende CLI, gestión de procesos y pipes. 300 líneas bastan.',ru:'Пойми CLI, управление процессами и пайпы. 300 строк достаточно.',ar:'افهم أوامر الطرفية وإدارة العمليات والأنابيب. يكفي 300 سطر.'}
+  },
+  {
+    cat:'beginner', icon:'🌊', iconBg:'rgba(56,189,248,0.15)', diff:3, langs:['Go','Python','Rust'],
+    url:'https://github.com/codecrafters-io/build-your-own-x#build-your-own-bittorrent-client',
+    t:{zh:'写一个 BitTorrent 客户端',en:'Build a BitTorrent Client',fr:'Créez un client BitTorrent',es:'Crea un cliente BitTorrent',ru:'Создай BitTorrent-клиент',ar:'اصنع عميل تورنت'},
+    d:{zh:'理解 P2P 网络、协议解析、并发编程。',en:'Understand P2P networking, protocol parsing, concurrency.',fr:'P2P, parsing de protocole, programmation concurrente.',es:'P2P, parsing de protocolo, concurrencia.',ru:'P2P-сети, разбор протокола, конкурентность.',ar:'شبكات P2P وتحليل البروتوكول والبرمجة المتزامنة.'}
+  },
+  {
+    cat:'beginner', icon:'📝', iconBg:'rgba(167,139,250,0.15)', diff:2, langs:['JavaScript','Python','Go'],
+    url:'https://github.com/codecrafters-io/build-your-own-x#build-your-own-markdown-parser',
+    t:{zh:'写一个 Markdown 解析器',en:'Build a Markdown Parser',fr:'Créez un analyseur Markdown',es:'Crea un parser de Markdown',ru:'Создай парсер Markdown',ar:'اصنع محلّل ماركداون'},
+    d:{zh:'理解文本解析、AST、递归。前端开发者的必修课。',en:'Text parsing, AST, recursion — essential for front-end devs.',fr:'Parsing de texte, AST, récursivité — essentiel pour le frontend.',es:'Parsing de texto, AST, recursión — esencial para frontend.',ru:'Разбор текста, AST, рекурсия — основа для фронтендера.',ar:'تحليل النصوص وAST والاستدعاء الذاتي — أساسي لمطوري الواجهات.'}
+  },
+  {
+    cat:'intermediate', icon:'🔀', iconBg:'rgba(251,191,36,0.15)', diff:3, langs:['Python','C','Go','Rust'],
+    url:'https://github.com/codecrafters-io/build-your-own-x#build-your-own-git',
+    t:{zh:'写一个 Git',en:'Build Your Own Git',fr:'Créez votre propre Git',es:'Crea tu propio Git',ru:'Создай свой Git',ar:'اصنع جيت خاص بك'},
+    d:{zh:'理解版本控制、DAG、diff算法。用过100次Git，不如写一次。',en:'Version control, DAG, diff algorithms. Used Git 100 times? Write it once.',fr:'Contrôle de version, DAG, algorithmes de diff. Utilisé Git 100 fois ? Écrivez-le une fois.',es:'Control de versiones, DAG, algoritmos diff. ¿Usaste Git 100 veces? Escríbelo una vez.',ru:'Контроль версий, DAG, алгоритмы diff. Пользовался Git 100 раз? Напиши его однажды.',ar:'التحكم بالإصدارات وDAG وخوارزميات الفروقات. استخدمت جيت 100 مرة؟ اكتبه مرة واحدة.'}
+  },
+  {
+    cat:'intermediate', icon:'💾', iconBg:'rgba(244,114,182,0.15)', diff:3, langs:['Python','Go','C'],
+    url:'https://github.com/codecrafters-io/build-your-own-x#build-your-own-redis',
+    t:{zh:'写一个 Redis',en:'Build Your Own Redis',fr:'Créez votre propre Redis',es:'Crea tu propio Redis',ru:'Создай свой Redis',ar:'اصنع ريديس خاص بك'},
+    d:{zh:'理解内存数据库、网络编程、持久化。后端工程师必修课。',en:'In-memory DB, networking, persistence. Must for backend engineers.',fr:'Base en mémoire, réseau, persistance. Indispensable pour le backend.',es:'BD en memoria, redes, persistencia. Imprescindible para backend.',ru:'In-memory БД, сеть, персистентность. Обязательно для бэкендеров.',ar:'قواعد البيانات الذاكراتية والشبكات والاستمرارية — أساسي لمهندسي الخلفية.'}
+  },
+  {
+    cat:'intermediate', icon:'⚛️', iconBg:'rgba(56,189,248,0.15)', diff:4, langs:['JavaScript','TypeScript'],
+    url:'https://github.com/codecrafters-io/build-your-own-x#build-your-own-react',
+    t:{zh:'写一个 React',en:'Build Your Own React',fr:'Créez votre propre React',es:'Crea tu propio React',ru:'Создай свой React',ar:'اصنع رياكت خاص بك'},
+    d:{zh:'理解 Virtual DOM、Fiber 架构。200行JS实现核心。',en:'Virtual DOM, Fiber architecture. Core React in 200 lines of JS.',fr:'Virtual DOM, architecture Fiber. Le cœur de React en 200 lignes.',es:'Virtual DOM, arquitectura Fiber. El núcleo de React en 200 líneas.',ru:'Virtual DOM, архитектура Fiber. Ядро React в 200 строках JS.',ar:'DOM الافتراضي وهندسة فايبر. نواة رياكت في 200 سطر.'}
+  },
+  {
+    cat:'intermediate', icon:'🧠', iconBg:'rgba(167,139,250,0.15)', diff:4, langs:['Python','PyTorch'],
+    url:'https://github.com/rasbt/LLMs-from-scratch',
+    t:{zh:'写一个大语言模型',en:'Build an LLM from Scratch',fr:'Créez un LLM de zéro',es:'Crea un LLM desde cero',ru:'Создай LLM с нуля',ar:'اصنع نموذج لغة كبير من الصفر'},
+    d:{zh:'理解 Transformer、注意力机制、预训练。用PyTorch从零搭建。',en:'Transformer, attention, pretraining. Build GPT from scratch with PyTorch.',fr:'Transformer, attention, pré-entraînement. GPT de zéro avec PyTorch.',es:'Transformer, atención, preentrenamiento. GPT desde cero con PyTorch.',ru:'Transformer, внимание, претрейн. GPT с нуля на PyTorch.',ar:'المحولات وآلية الانتباه والتدريب المسبق. أعد بناء GPT بـ PyTorch.'}
+  },
+  {
+    cat:'intermediate', icon:'🔍', iconBg:'rgba(0,255,136,0.15)', diff:3, langs:['Python','Go','TypeScript'],
+    url:'https://github.com/codecrafters-io/build-your-own-x#build-your-own-search-engine',
+    t:{zh:'写一个搜索引擎',en:'Build a Search Engine',fr:'Créez un moteur de recherche',es:'Crea un motor de búsqueda',ru:'Создай поисковую систему',ar:'اصنع محرك بحث'},
+    d:{zh:'理解倒排索引、PageRank、爬虫与索引构建。',en:'Inverted index, PageRank, crawling and indexing.',fr:'Index inversé, PageRank, crawling et indexation.',es:'Índice invertido, PageRank, crawling e indexación.',ru:'Инвертированный индекс, PageRank, краулинг.',ar:'الفهرس المعكوس وخوارزمية بيج رانك والزحف والفهرسة.'}
+  },
+  {
+    cat:'advanced', icon:'🖥️', iconBg:'rgba(244,114,182,0.15)', diff:5, langs:['Rust','C','Assembly'],
+    url:'https://os.phil-opp.com/',
+    t:{zh:'写一个操作系统',en:'Write an OS in Rust',fr:'Écrivez un OS en Rust',es:'Escribe un SO en Rust',ru:'Напиши ОС на Rust',ar:'اكتب نظام تشغيل بلغة رست'},
+    d:{zh:'理解内核、内存管理、调度、文件系统。程序员的终极挑战。',en:'Kernel, memory management, scheduling, file systems. The ultimate challenge.',fr:'Noyau, mémoire, ordonnancement, systèmes de fichiers. Le défi ultime.',es:'Kernel, memoria, planificación, sistemas de archivos. El reto definitivo.',ru:'Ядро, память, планировщик, ФС. Вызов для программиста.',ar:'النواة وإدارة الذاكرة والجدولة وأنظمة الملفات — التحدي الأقصى.'}
+  },
+  {
+    cat:'advanced', icon:'🗣️', iconBg:'rgba(251,191,36,0.15)', diff:5, langs:['Java','C','Rust','Go'],
+    url:'https://craftinginterpreters.com/',
+    t:{zh:'写一个编程语言',en:'Crafting Interpreters',fr:'Créez votre langage',es:'Crea tu lenguaje de programación',ru:'Создай язык программирования',ar:'اصنع لغة برمجة'},
+    d:{zh:'词法分析、语法树、编译器。最硬核的系统编程。',en:'Lexing, AST, compilers. The hardest system programming.',fr:'Analyse lexicale, AST, compilateurs. Le plus dur de la programmation.',es:'Análisis léxico, AST, compiladores. Lo más duro.',ru:'Лексика, AST, компиляторы. Самое сложное.',ar:'التحليل المعجمي وشجرة الصياغة والمترجمات — أصعب برمجة أنظمة.'}
+  },
+  {
+    cat:'advanced', icon:'📦', iconBg:'rgba(56,189,248,0.15)', diff:4, langs:['C','Go'],
+    url:'https://blog.lizzie.io/linux-containers-in-500-lines.html',
+    t:{zh:'写一个 Docker',en:'Linux Containers in 500 Lines',fr:'Conteneurs Linux en 500 lignes',es:'Contenedores Linux en 500 líneas',ru:'Контейнеры Linux в 500 строк',ar:'حاويات لينكس في 500 سطر'},
+    d:{zh:'理解 Linux 容器、namespace、cgroups。500行C代码实现。',en:'Linux containers, namespaces, cgroups. 500 lines of C.',fr:'Conteneurs, namespaces, cgroups. 500 lignes de C.',es:'Contenedores, namespaces, cgroups. 500 líneas de C.',ru:'Контейнеры, namespace, cgroups. 500 строк на C.',ar:'الحاويات ومساحات الأسماء وcgroups. 500 سطر بلغة C.'}
+  },
+  {
+    cat:'advanced', icon:'🧮', iconBg:'rgba(0,255,136,0.15)', diff:5, langs:['C','Rust'],
+    url:'https://arjunsuresh.github.io/blog/2024/01/15/building-a-memory-allocator.html',
+    t:{zh:'写一个内存分配器',en:'Build a Memory Allocator',fr:'Créez un allocateur mémoire',es:'Crea un asignador de memoria',ru:'Создай аллокатор памяти',ar:'اصنع مخصص ذاكرة'},
+    d:{zh:'理解堆内存管理、碎片化、伙伴系统与SLAB分配。',en:'Heap management, fragmentation, buddy system, SLAB.',fr:'Gestion du tas, fragmentation, buddy system, SLAB.',es:'Gestión del heap, fragmentación, buddy system, SLAB.',ru:'Управление кучей, фрагментация, buddy system, SLAB.',ar:'إدارة الكومة والتجزئة ونظام الأصدقاء وSLAB.'}
+  },
+  {
+    cat:'web3', icon:'⛓️', iconBg:'rgba(0,255,136,0.15)', diff:3, langs:['Python','Go','TypeScript','Rust'],
+    url:'https://github.com/codecrafters-io/build-your-own-x#build-your-own-blockchain--cryptocurrency',
+    t:{zh:'写一个区块链',en:'Build a Blockchain',fr:'Créez une blockchain',es:'Crea una blockchain',ru:'Создай блокчейн',ar:'اصنع بلوكتشين'},
+    d:{zh:'理解分布式账本、共识机制、默克尔树。从零构建最小可行链。',en:'Distributed ledger, consensus, Merkle trees. Build a minimal viable chain.',fr:'Registre distribué, consensus, arbres de Merkle. Chaîne minimale.',es:'Ledger distribuido, consenso, árboles de Merkle. Cadena mínima.',ru:'Распределённый реестр, консенсус, деревья Меркла.',ar:'دفتر الأستاذ الموزع وآليات الإجماع وأشجار ميركل — ابدأ بسلسلة بسيطة.'}
+  },
+  {
+    cat:'web3', icon:'🪙', iconBg:'rgba(251,191,36,0.15)', diff:3, langs:['Python','Go','Solidity'],
+    url:'https://solscan.io/token/DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH',
+    t:{zh:'写一个加密货币',en:'Build a Cryptocurrency',fr:'Créez une cryptomonnaie',es:'Crea una criptomoneda',ru:'Создай криптовалюту',ar:'اصنع عملة رقمية'},
+    d:{zh:'理解代币经济模型、质押机制、链上治理。EACO就是最佳案例。',en:'Tokenomics, staking, on-chain governance. EACO is the best case study.',fr:'Tokenomics, staking, gouvernance on-chain. EACO est le meilleur exemple.',es:'Tokenomics, staking, gobernanza on-chain. EACO es el mejor caso.',ru:'Токеномика, стейкинг, on-chain управление. EACO — лучший пример.',ar:'اقتصاد الرموز والتخزين والحوكمة على السلسلة — EACO أفضل مثال.'}
+  },
+  {
+    cat:'web3', icon:'🌊', iconBg:'rgba(56,189,248,0.15)', diff:4, langs:['TypeScript','Solidity','Rust'],
+    url:'https://github.com/eacocc/EACO_Exchange_DApp',
+    t:{zh:'写一个 DEX',en:'Build a Decentralized Exchange',fr:'Créez un DEX',es:'Crea un DEX',ru:'Создай DEX',ar:'اصنع بورصة لا مركزية'},
+    d:{zh:'理解AMM机制、流动性池、做市商策略。EACO已在Solana三大DEX上线。',en:'AMM, liquidity pools, market makers. EACO is live on 3 Solana DEXs.',fr:'AMM, pools de liquidité, market makers. EACO est listé sur 3 DEX Solana.',es:'AMM, pools de liquidez, market makers. EACO está en 3 DEX de Solana.',ru:'AMM, пулы ликвидности, маркет-мейкеры. EACO уже на 3 DEX Solana.',ar:'آليات AMM ومجمعات السيولة وصناع السوق. EACO متاح على 3 بورصات سولانا.'}
+  },
+  {
+    cat:'web3', icon:'🤖', iconBg:'rgba(167,139,250,0.15)', diff:3, langs:['Python','TypeScript','Rust'],
+    url:'https://eaco-build-world.base44.app/',
+    t:{zh:'AI Agent × EACO',en:'AI Agent × EACO',fr:'Agent IA × EACO',es:'Agente IA × EACO',ru:'AI-агент × EACO',ar:'وكيل ذكاء اصطناعي × EACO'},
+    d:{zh:'EACO + AI Agent = 地球智能经济。让AI代理自主交易EACO。',en:'EACO + AI Agent = Earth Intelligence Economy. Let AI agents trade EACO autonomously.',fr:'EACO + Agent IA = économie intelligente terrestre. Laissez les agents IA trader EACO.',es:'EACO + Agente IA = economía inteligente terrestre. Deja que los agentes IA operen EACO.',ru:'EACO + AI-агент = интеллектуальная экономика Земли. Пусть агенты торгуют EACO.',ar:'EACO + وكيل الذكاء الاصطناعي = اقتصاد الأرض الذكي. دع الوكلاء يتداولون EACO.'}
+  }
+];
+
+// ═══════════════════════════════════════════════════════
+//  App state & rendering
+// ═══════════════════════════════════════════════════════
+let currentLang = 'zh';
+let currentCat = 'all';
+const STORAGE_KEY = 'eaco-build-world-lang';
+
+function detectLang() {
+  // 1. URL query param (?lang=xx) — shareable links
+  try {
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    if (urlLang && i18n[urlLang]) return urlLang;
+  } catch (e) { /* ignore */ }
+  // 2. Saved preference
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved && i18n[saved]) return saved;
+  // 3. Browser language auto-detect
+  const nav = (navigator.language || 'zh').toLowerCase();
+  const map = {zh:'zh', fr:'fr', es:'es', ru:'ru', ar:'ar', en:'en'};
+  for (const [prefix, code] of Object.entries(map)) {
+    if (nav.startsWith(prefix)) return code;
+  }
+  return 'en';
+}
+
+function renderBYX() {
+  const grid = document.getElementById('byxGrid');
+  const filtered = currentCat === 'all' ? byxData : byxData.filter(d => d.cat === currentCat);
+  grid.innerHTML = filtered.map(item => {
+    const stars = Array.from({length:5}, (_, i) => {
+      if (i >= item.diff) return '<div class="diff-star" style="background:#1e293b;opacity:0.35"></div>';
+      return '<div class="diff-star ' + (item.diff <= 2 ? 'diff-easy' : (item.diff <= 3 ? 'diff-med' : 'diff-hard')) + '"></div>';
+    }).join('');
+    return `<a href="${item.url}" class="byx-card fade-in visible" target="_blank" rel="noopener">
+      <div class="byx-card-header">
+        <div class="byx-card-icon" style="background:${item.iconBg}">${item.icon}</div>
+        <div class="byx-difficulty">${stars}</div>
+      </div>
+      <h3>${item.t[currentLang]}</h3>
+      <p>${item.d[currentLang]}</p>
+      <div class="byx-lang">${item.langs.map(l => `<span class="lang-tag">${l}</span>`).join('')}</div>
+    </a>`;
+  }).join('');
+}
+
+function renderRoadmap() {
+  const grid = document.getElementById('roadmapGrid');
+  const data = i18n[currentLang].roadmap;
+  grid.innerHTML = data.map(item => `
+    <div class="roadmap-card ${item.c} fade-in visible">
+      <div class="roadmap-step">${item.step}</div>
+      <h3>${item.title}</h3>
+      <p>${item.p}</p>
+      <ul class="roadmap-list">${item.list.map(li => `<li>${li}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+function renderCommunity() {
+  const grid = document.getElementById('communityGrid');
+  const data = i18n[currentLang].community;
+  grid.innerHTML = data.map(item => `
+    <a href="${item.url}" class="lang-card fade-in visible" target="_blank" rel="noopener">
+      <span class="lang-flag">${item.flag}</span>
+      <div class="lang-name">${item.name}</div>
+      <div class="lang-sub">${item.sub}</div>
+    </a>`).join('');
+}
+
+function applyI18n(lang) {
+  if (!i18n[lang]) lang = 'en';
+  currentLang = lang;
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  localStorage.setItem(STORAGE_KEY, lang);
+  renderBYX(); renderRoadmap(); renderCommunity();
+}
+
+// ─── Init ───
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyI18n(btn.dataset.lang));
+});
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+    renderBYX();
+  });
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.08});
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+applyI18n(detectLang());
+</script>
+</body>
+</html>
