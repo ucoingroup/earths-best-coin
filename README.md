@@ -103,7 +103,7 @@ eaco总量13.5亿个。
 - e-DOGE, DOGE-e: https://orbmarkets.io/address/Atx4Y3v5VW68tnAJoRgEic4ryXa8PdPL7joXtWFEvj34
 - EACO — SOL Top 10 DEX: https://ucoingroup.github.io/earths-best-coin/eaco-sol-top10-dex2025.html
 
-eaco farm apr 23.56%，100% permanently locked（流动性池 100% 永久锁定）。
+eaco farm apr 23.56%，10% permanently locked（流动性池 10% 永久锁定）。
 
 ---
 
