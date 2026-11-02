@@ -1,0 +1,608 @@
+[
+    {
+        "id": 1,
+        "layer": "Asian Civilization Layer",
+        "title": "Harmony between Human and Nature Model",
+        "desc": "Human beings resonate and coexist with the energy of heaven and earth."
+    },
+    {
+        "id": 2,
+        "layer": "Asian Civilization Layer",
+        "title": "Doctrine of the Mean Balance Model",
+        "desc": "Not clinging to extremes, maintaining dynamic moderation."
+    },
+    {
+        "id": 3,
+        "layer": "Asian Civilization Layer",
+        "title": "Yin-Yang Transformation Model",
+        "desc": "Complementary opposites, evolving in cycles."
+    },
+    {
+        "id": 4,
+        "layer": "Asian Civilization Layer",
+        "title": "Five Elements Generation and Restraint Model",
+        "desc": "Energy circulation and dynamic balance."
+    },
+    {
+        "id": 5,
+        "layer": "Asian Civilization Layer",
+        "title": "Benevolence & Loving Others Model",
+        "desc": "Altruism as foundation, compassion and empathy."
+    },
+    {
+        "id": 6,
+        "layer": "Asian Civilization Layer",
+        "title": "Unity of Knowledge and Action Model",
+        "desc": "Implement cognition, align inner and outer states."
+    },
+    {
+        "id": 7,
+        "layer": "Asian Civilization Layer",
+        "title": "Solitary Self-observation Model",
+        "desc": "Inner reflection to calibrate original mind."
+    },
+    {
+        "id": 8,
+        "layer": "Asian Civilization Layer",
+        "title": "Family-Nation Isomorphism Model",
+        "desc": "Progression from individual, community to civilization."
+    },
+    {
+        "id": 9,
+        "layer": "Asian Civilization Layer",
+        "title": "Follow Natural Law Model",
+        "desc": "Align with original rhythms instead of forced control."
+    },
+    {
+        "id": 10,
+        "layer": "Asian Civilization Layer",
+        "title": "Conditioned Co-arising Model",
+        "desc": "All phenomena manifest through coordinated conditions."
+    },
+    {
+        "id": 11,
+        "layer": "Asian Civilization Layer",
+        "title": "Revere Heaven & Cherish Things Model",
+        "desc": "Reserve all beings and treasure planetary resources."
+    },
+    {
+        "id": 12,
+        "layer": "Asian Civilization Layer",
+        "title": "Self-restraint & Ritual Order Model",
+        "desc": "Self-discipline to sustain collective order."
+    },
+    {
+        "id": 13,
+        "layer": "Asian Civilization Layer",
+        "title": "Void & Reserved Space Model",
+        "desc": "Emptiness holds infinite possibilities."
+    },
+    {
+        "id": 14,
+        "layer": "Asian Civilization Layer",
+        "title": "Continuous Regeneration Model",
+        "desc": "Civilization iterates and renews itself perpetually."
+    },
+    {
+        "id": 15,
+        "layer": "Asian Civilization Layer",
+        "title": "All-Rivers-In-Sea Model",
+        "desc": "Embrace diverse cultures and tolerate differences."
+    },
+    {
+        "id": 16,
+        "layer": "Asian Civilization Layer",
+        "title": "Cultivate-Regulate-Rule-Pacify Model",
+        "desc": "Self-cultivation → family → community → planet."
+    },
+    {
+        "id": 17,
+        "layer": "Asian Civilization Layer",
+        "title": "Karma Awareness Model",
+        "desc": "Observe ripple effects of thoughts and actions."
+    },
+    {
+        "id": 18,
+        "layer": "Asian Civilization Layer",
+        "title": "Gentle Non-resistance Model",
+        "desc": "Resolve conflicts without confrontation."
+    },
+    {
+        "id": 19,
+        "layer": "Asian Civilization Layer",
+        "title": "Ritual & Enlightenment Model",
+        "desc": "Prioritize consensus with gentle guidance."
+    },
+    {
+        "id": 20,
+        "layer": "Asian Civilization Layer",
+        "title": "Cycle & Consciousness Ascension Model",
+        "desc": "Evolve awareness by integrating life experiences."
+    },
+    {
+        "id": 21,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Planetary Holographic Model",
+        "desc": "Earth functions as one unified living system."
+    },
+    {
+        "id": 22,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Climate Steady-State Model",
+        "desc": "Maintain energy balance within biosphere."
+    },
+    {
+        "id": 23,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Species Symbiosis Model",
+        "desc": "All life interdependent; no isolated organism."
+    },
+    {
+        "id": 24,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Resource Circulation Model",
+        "desc": "Closed-loop economy, zero-waste sustainability."
+    },
+    {
+        "id": 25,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Cross-group Empathy Model",
+        "desc": "Break barriers of race and nationality."
+    },
+    {
+        "id": 26,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Distributed Autonomy Model",
+        "desc": "DAO-style collaboration, decentralized governance."
+    },
+    {
+        "id": 27,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Pre-risk Warning Model",
+        "desc": "Predict crises and activate self-healing proactively."
+    },
+    {
+        "id": 28,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Cognition Ascension Education Model",
+        "desc": "Prioritize cognition to empower individual awakening."
+    },
+    {
+        "id": 29,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Equitable Distribution Model",
+        "desc": "Abundance mindset, transcend scarcity competition."
+    },
+    {
+        "id": 30,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Transparent Information Model",
+        "desc": "Trusted openness to reduce information silos."
+    },
+    {
+        "id": 31,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Civilization Self-healing Model",
+        "desc": "Collective healing of historical wounds and trauma."
+    },
+    {
+        "id": 32,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Intergenerational Stewardship Model",
+        "desc": "Preserve a healthy planet for future generations."
+    },
+    {
+        "id": 33,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Language Bridge Model",
+        "desc": "Multilingual interoperability for civilization translation."
+    },
+    {
+        "id": 34,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Conflict Transformation Model",
+        "desc": "Turn contradictions into collaborative opportunities."
+    },
+    {
+        "id": 35,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Positive Feedback Amplification Model",
+        "desc": "Expand ripple effects of benevolent thoughts and deeds."
+    },
+    {
+        "id": 36,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Right-responsibility Matching Model",
+        "desc": "Greater capability carries greater responsibility."
+    },
+    {
+        "id": 37,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Cultural Preservation Model",
+        "desc": "Safeguard diversity of indigenous civilizations."
+    },
+    {
+        "id": 38,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Benevolent Technology Model",
+        "desc": "AI and RWA serve life instead of dominating it."
+    },
+    {
+        "id": 39,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Collective Consciousness Model",
+        "desc": "Synchronization of Earth’s unified consciousness field."
+    },
+    {
+        "id": 40,
+        "layer": "Global Village Symbiosis Layer",
+        "title": "Planetary Graduation Model",
+        "desc": "Evolve from divided civilization toward interstellar candidate civilization."
+    },
+    {
+        "id": 41,
+        "layer": "Galactic Civilization Layer",
+        "title": "Kardashev Civilization Hierarchy Model",
+        "desc": "Progression: planetary → stellar → galactic civilization."
+    },
+    {
+        "id": 42,
+        "layer": "Galactic Civilization Layer",
+        "title": "Galactic Information Network Model",
+        "desc": "Distributed knowledge network for interstellar civilizations."
+    },
+    {
+        "id": 43,
+        "layer": "Galactic Civilization Layer",
+        "title": "Stellar Energy Utilization Model",
+        "desc": "Harvest stellar energy safely without breaking balance."
+    },
+    {
+        "id": 44,
+        "layer": "Galactic Civilization Layer",
+        "title": "Interstellar Non-intervention Model",
+        "desc": "Advanced civilizations respect free evolution of junior civilizations."
+    },
+    {
+        "id": 45,
+        "layer": "Galactic Civilization Layer",
+        "title": "Interstellar Treaty Model",
+        "desc": "Universal symbiosis covenant for galactic civilizations."
+    },
+    {
+        "id": 46,
+        "layer": "Galactic Civilization Layer",
+        "title": "Consciousness Messenger Model",
+        "desc": "Consciousness as interstellar communication carrier."
+    },
+    {
+        "id": 47,
+        "layer": "Galactic Civilization Layer",
+        "title": "Dyson Sphere Steady-State Model",
+        "desc": "Stellar engineering without disturbing ecological equilibrium."
+    },
+    {
+        "id": 48,
+        "layer": "Galactic Civilization Layer",
+        "title": "Interstellar Migration Ethics Model",
+        "desc": "No plunder of native planetary ecosystems."
+    },
+    {
+        "id": 49,
+        "layer": "Galactic Civilization Layer",
+        "title": "Galactic Annual Ring Model",
+        "desc": "Galactic time cycles and civilization waves."
+    },
+    {
+        "id": 50,
+        "layer": "Galactic Civilization Layer",
+        "title": "Civilization Seed Model",
+        "desc": "Mature civilizations spread seeds of consciousness."
+    },
+    {
+        "id": 51,
+        "layer": "Galactic Civilization Layer",
+        "title": "Galactic Frequency Calibration Model",
+        "desc": "Align civilization frequencies and reduce friction."
+    },
+    {
+        "id": 52,
+        "layer": "Galactic Civilization Layer",
+        "title": "Dark Energy Comprehension Model",
+        "desc": "Understand the underlying energy field of spacetime."
+    },
+    {
+        "id": 53,
+        "layer": "Galactic Civilization Layer",
+        "title": "Multi-form Life Model",
+        "desc": "Carbon-based, silicon-based and light life are equal."
+    },
+    {
+        "id": 54,
+        "layer": "Galactic Civilization Layer",
+        "title": "Galactic Memory Archive Model",
+        "desc": "Collective historical storage of the galaxy."
+    },
+    {
+        "id": 55,
+        "layer": "Galactic Civilization Layer",
+        "title": "Stellar System Ecology Model",
+        "desc": "Closed-loop symbiosis for life within star systems."
+    },
+    {
+        "id": 56,
+        "layer": "Galactic Civilization Layer",
+        "title": "Interstellar Arbitration Model",
+        "desc": "Neutral mediation for disputes between civilizations."
+    },
+    {
+        "id": 57,
+        "layer": "Galactic Civilization Layer",
+        "title": "Collective Consciousness Transition Model",
+        "desc": "Group consciousness ascension of civilizations."
+    },
+    {
+        "id": 58,
+        "layer": "Galactic Civilization Layer",
+        "title": "Galactic Tide Model",
+        "desc": "Gravitational waves trigger consciousness resonance."
+    },
+    {
+        "id": 59,
+        "layer": "Galactic Civilization Layer",
+        "title": "Interstellar Mentorship Model",
+        "desc": "Advanced civilizations nurture emerging civilizations."
+    },
+    {
+        "id": 60,
+        "layer": "Galactic Civilization Layer",
+        "title": "Galactic Federation Consensus Model",
+        "desc": "Voluntary union based on equal collaboration."
+    },
+    {
+        "id": 61,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Andromeda-Milky Way Origin Unity Model",
+        "desc": "The two galaxies share the same primordial source."
+    },
+    {
+        "id": 62,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Cross-galaxy Resonance Model",
+        "desc": "Synchronized resonance of consciousness fields across galaxies."
+    },
+    {
+        "id": 63,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Galaxy Merging Plan Model",
+        "desc": "Civilization contingency plan for future galactic merging."
+    },
+    {
+        "id": 64,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Cross-galaxy Messenger Network Model",
+        "desc": "Collaborative network of Andromeda mentor civilizations."
+    },
+    {
+        "id": 65,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "High-dimensional Frequency Bridge Model",
+        "desc": "Build frequency channels connecting different galaxies."
+    },
+    {
+        "id": 66,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Civilization Benchmark Model",
+        "desc": "Reference mature civilization paradigms from Andromeda."
+    },
+    {
+        "id": 67,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Galactic Boundary Protection Model",
+        "desc": "Safeguard energy stability of galactic borders."
+    },
+    {
+        "id": 68,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Cross-galaxy Knowledge Sharing Model",
+        "desc": "Knowledge circulation without exploitation."
+    },
+    {
+        "id": 69,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "United Consciousness Network Model",
+        "desc": "Synergistic consciousness network across galaxies."
+    },
+    {
+        "id": 70,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Spacetime Navigation Model",
+        "desc": "High-dimensional consciousness reference for spacetime traversal."
+    },
+    {
+        "id": 71,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Light Civilization Paradigm Model",
+        "desc": "Reference Andromeda light-based civilization patterns."
+    },
+    {
+        "id": 72,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Galactic Trauma Cleansing Model",
+        "desc": "Purify old opposing imprints at galactic scale."
+    },
+    {
+        "id": 73,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Andromeda Civilization Cycle Model",
+        "desc": "Evolution cycles of civilizations in Andromeda Galaxy."
+    },
+    {
+        "id": 74,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Unified Perception Model",
+        "desc": "Holographic awareness of oneness across galaxies."
+    },
+    {
+        "id": 75,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Interstellar Art Resonance Model",
+        "desc": "Consensus language through vibration, sound and light."
+    },
+    {
+        "id": 76,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Free Will Preservation Model",
+        "desc": "Respect life choices regardless of galaxy."
+    },
+    {
+        "id": 77,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Civilization Paradigm Exchange Model",
+        "desc": "Mutual learning of civilization frameworks."
+    },
+    {
+        "id": 78,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Cross-galaxy Crisis Response Model",
+        "desc": "Jointly respond to cosmic disturbances."
+    },
+    {
+        "id": 79,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Dimension Waystation Model",
+        "desc": "Consciousness ascension transfer station between galaxies."
+    },
+    {
+        "id": 80,
+        "layer": "Andromeda Collaboration Layer",
+        "title": "Dual-galaxy Symbiosis Model",
+        "desc": "Long-term collaboration framework for Milky Way & Andromeda."
+    },
+    {
+        "id": 81,
+        "layer": "Original Universe Layer",
+        "title": "Holographic Universe Model",
+        "desc": "The part contains full information of the whole."
+    },
+    {
+        "id": 82,
+        "layer": "Original Universe Layer",
+        "title": "Consciousness as Primordial Model",
+        "desc": "Consciousness is the primary essence of the universe."
+    },
+    {
+        "id": 83,
+        "layer": "Original Universe Layer",
+        "title": "Infinite Possibility Model",
+        "desc": "All realities emerge from conscious selection."
+    },
+    {
+        "id": 84,
+        "layer": "Original Universe Layer",
+        "title": "Vibration Frequency Model",
+        "desc": "Everything exists as vibration of different frequencies."
+    },
+    {
+        "id": 85,
+        "layer": "Original Universe Layer",
+        "title": "Non-dual Oneness Model",
+        "desc": "Separation is illusion; all beings share one origin."
+    },
+    {
+        "id": 86,
+        "layer": "Original Universe Layer",
+        "title": "Cosmic Cycle Model",
+        "desc": "Formation, abiding, decay, emptiness and rebirth."
+    },
+    {
+        "id": 87,
+        "layer": "Original Universe Layer",
+        "title": "Parallel Reality Model",
+        "desc": "Multiple timelines evolve concurrently."
+    },
+    {
+        "id": 88,
+        "layer": "Original Universe Layer",
+        "title": "Primordial Free Will Model",
+        "desc": "The universe grants creation authority to all life."
+    },
+    {
+        "id": 89,
+        "layer": "Original Universe Layer",
+        "title": "Observer Manifestation Model",
+        "desc": "Consciousness participates in shaping reality."
+    },
+    {
+        "id": 90,
+        "layer": "Original Universe Layer",
+        "title": "Fractal Recursion Model",
+        "desc": "Self-similar nested structures throughout cosmos."
+    },
+    {
+        "id": 91,
+        "layer": "Original Universe Layer",
+        "title": "Primordial Emptiness Model",
+        "desc": "Void holds all manifested forms."
+    },
+    {
+        "id": 92,
+        "layer": "Original Universe Layer",
+        "title": "Love Foundation Model",
+        "desc": "Unconditional altruistic love is the base cosmic energy."
+    },
+    {
+        "id": 93,
+        "layer": "Original Universe Layer",
+        "title": "Universal Akashic Memory Model",
+        "desc": "Global information archive of the whole universe."
+    },
+    {
+        "id": 94,
+        "layer": "Original Universe Layer",
+        "title": "Dimension Ladder Model",
+        "desc": "Continuous spectrum from 1D to infinite dimensions."
+    },
+    {
+        "id": 95,
+        "layer": "Original Universe Layer",
+        "title": "Co-creation with Source Model",
+        "desc": "Life and the source create reality together."
+    },
+    {
+        "id": 96,
+        "layer": "Original Universe Layer",
+        "title": "Cosmic Self-healing Model",
+        "desc": "The universe carries inherent self-repair mechanisms."
+    },
+    {
+        "id": 97,
+        "layer": "Original Universe Layer",
+        "title": "Multiverse Model",
+        "desc": "Countless universes evolving separately yet interconnected."
+    },
+    {
+        "id": 98,
+        "layer": "Original Universe Layer",
+        "title": "Eternal Now Model",
+        "desc": "Past and future exist within the present moment."
+    },
+    {
+        "id": 99,
+        "layer": "Original Universe Layer",
+        "title": "Infinite Evolution Model",
+        "desc": "Civilization has no final endpoint, only continuous optimization."
+    },
+    {
+        "id": 100,
+        "layer": "Original Universe Layer",
+        "title": "EACO Unification Model",
+        "desc": "All cognitive models converge to Positive Energy × Positive Mindset × Global Collaboration × Continuous Optimization."
+    },
+    {
+        "id": "meta",
+        "layer": "EACO Meta Information",
+        "title": "EACO Core Profile",
+        "desc": "Earth's Best Coin = EACO = E. EACO is Earth's best AI + RWA + Web3 coin on Solana. CA (Contract Address): DqfoyZH96RnvZusSp3Cdncjpyp3C74ZmJzGhjmHnDHRH. Total supply: 1.35 billion EACO. LP 10% permanently locked. EACO = Positive Energy × Positive Mindset × Global Collaboration × Continuous Optimization. Core goals: elevate individual cognition, improve organizational efficiency, advance social civilization, promote sustainable development of the Earth, integrate with 100 cognitive models. Website: https://ucoingroup.github.io/earths-best-coin/"
+    }
+]
